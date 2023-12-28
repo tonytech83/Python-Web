@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+    <style>
+        form .helptext {
+            display: none;
+        }
+
+        form label:hover + .helptext {
+            display: block;
+            font-size: 0.7em;
+            color: darkgrey;
+        }
+
+        .form-control {
+            padding: 5px 15px;
+            color: white;
+            background: black;
+        }
+
+    </style>
+</head>
+<body>
+<h1>
+    {% if name %}
+        Hello, {{ name }}! Nice to see you!
+    {% else %}
+        Please, enter your name!
+    {% endif %}
+</h1>
+<form method="POST" action="{% url 'index' %}">
+    {% csrf_token %}
+    {# we can rend our form as_div, as_p and etc.#}
+    {{ form.as_div }}
+    <button>Send name</button>
+    {# <input type="submit" value="Send name"> #}
+</form>
+</body>
+</html>
