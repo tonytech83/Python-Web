@@ -27,19 +27,24 @@
     </style>
 </head>
 <body>
-<h1>
-    {% if name %}
-        Hello, {{ name }}! Nice to see you!
-    {% else %}
-        Please, enter your name!
-    {% endif %}
+
+<ul>
+    <li>
+        <a href="{% url 'index' %}">Django Form</a>
+    </li>
+    <li>
+        <a href="{% url 'model form' %}">Django Model Form</a>
+    </li>
+    <li>
+        <a href="{% url 'demo relations' %}">Demo Relations</a>
+    </li>
+</ul>
+
+<h1>{% block title %}
+{% endblock %}
 </h1>
-<form method="POST" action="{% url 'index' %}">
-    {% csrf_token %}
-    {# we can rend our form as_div, as_p and etc.#}
-    {{ form.as_div }}
-    <button>Send name</button>
-    {# <input type="submit" value="Send name"> #}
-</form>
+
+{% block content %}
+{% endblock %}
 </body>
 </html>

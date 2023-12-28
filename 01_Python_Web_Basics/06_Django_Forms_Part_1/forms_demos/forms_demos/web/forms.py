@@ -1,6 +1,9 @@
 from django import forms
 
+from forms_demos.web.models import Person
 
+
+# Django Form
 class PersonForm(forms.Form):
     """
     Each field has custom validation logic
@@ -64,3 +67,27 @@ class PersonForm(forms.Form):
     story = forms.CharField(
         widget=forms.Textarea(),
     )
+
+
+# Django Model Form
+class PersonCreateForm(forms.ModelForm):
+    class Meta:
+        model = Person
+        fields = '__all__'  # or ('name', 'age')
+        # exclude = ('pets',)
+
+        widgets = {
+            'name': forms.TextInput(
+                attrs={
+                    'class': 'form-control',
+                }
+            ),
+        }
+
+        help_texts = {
+            'name': 'Your name',
+        }
+
+        labels = {
+            'age': 'The AGE',
+        }
