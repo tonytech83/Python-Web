@@ -6,11 +6,13 @@
         <div class="col-9">
 
             <!-- Start Searchbar Form -->
-            <form class="searchbar" method="post">
-                <input type="text" placeholder="Search by pet name...">
+            <form class="searchbar" method="GET" action="{% url 'index' %}">
+                {#                <input type="text" placeholder="Search by pet name...">#}
+                {{ search_form }}
                 <button>
                     <img src="{% static '/images/search.png' %}" height="18" alt="img2">
                 </button>
+                {% csrf_token %}
             </form>
             <!-- End Searchbar Form -->
 

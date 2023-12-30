@@ -12,8 +12,9 @@ class Photo(models.Model):
     MAX_DESCRIPTION_LENGTH = 300
     MAX_LOCATION_LENGTH = 30
 
+    # Required folder `media` to work correctly
     photo = models.ImageField(
-        upload_to='media/photos/',
+        upload_to='photos/',
         validators=[
             validate_file_size,
         ],

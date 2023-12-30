@@ -4,7 +4,7 @@
 from django.db import models
 from django.template.defaultfilters import slugify
 
-from petstagram.core.mixins import StrFromFieldMixin
+from petstagram.core.model_mixins import StrFromFieldMixin
 
 """
 The fields Name and Pet Photo are required:
