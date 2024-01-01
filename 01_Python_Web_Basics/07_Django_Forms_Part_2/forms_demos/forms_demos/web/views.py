@@ -1,43 +1,10 @@
-from django import forms
-from django.core.exceptions import ValidationError
 from django.http import HttpResponse
 from django.shortcuts import render
 
-
-def validate_text(value):
-    # if valid:
-    #   do nothing
-    # else:
-    #   raise ValidationException()
-
-    if '_' in value:
-        raise ValidationError('`_` is invalid character for `text` field')
+from forms_demos.web.forms import TodoForm, TodoCreateFrom
 
 
-def validate_priority(value):
-    if value < 1 or 10 < value:
-        raise ValidationError('Priority must be between 1 and 10')
-
-
-class TodoForm(forms.Form):
-    text = forms.CharField(
-        max_length=30,
-        validators=(
-            validate_text,
-        ),
-    )
-
-    is_done = forms.BooleanField(
-        required=False,
-    )
-
-    priority = forms.IntegerField(
-        validators=(
-            validate_priority,
-        ),
-    )
-
-
+# With Django Form
 def index(request):
     if request.method == 'GET':
         form = TodoForm()
@@ -52,3 +19,21 @@ def index(request):
     }
 
     return render(request, 'index.html', context)
+
+
+# With Django ModelForm
+def index2(request):
+    if request.method == 'GET':
+        form = TodoCreateFrom()
+    else:
+        form = TodoCreateFrom(request.POST)
+
+        if form.is_valid():
+            form.save()
+            return HttpResponse('All is valid')
+
+    context = {
+        'form': form,
+    }
+
+    return render(request, 'index2.html', context)
