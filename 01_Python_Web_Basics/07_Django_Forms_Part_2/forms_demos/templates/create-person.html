@@ -1,0 +1,9 @@
+<h1>Create Person</h1>
+<form method="POST" action="{% url 'create person' %}" enctype="multipart/form-data">
+    {{ form.as_p }}
+    <button>Create</button>
+    {% csrf_token %}
+    <p>
+        <a href="{% url 'form' %}">BACK</a>
+    </p>
+</form>

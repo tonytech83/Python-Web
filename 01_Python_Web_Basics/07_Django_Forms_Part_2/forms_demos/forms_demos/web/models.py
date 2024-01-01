@@ -10,6 +10,14 @@ class Person(models.Model):
         max_length=MAX_NAME_LENGTH,
     )
 
+    # to work with media files, we should install pillow
+    profile_image = models.ImageField(
+        # where to be saved media files
+        upload_to='persons',
+        null=True,
+        blank=True,
+    )
+
     def __str__(self):
         return self.name
 

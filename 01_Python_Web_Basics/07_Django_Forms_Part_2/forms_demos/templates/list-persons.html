@@ -1,0 +1,12 @@
+<h1>List all persons</h1>
+<ul>
+    {% for person in persons %}
+        <li>
+            <img width="50" src="/media/{{ person.profile_image }}" alt="">
+            <strong>{{ person.name }}</strong>
+        </li>
+    {% endfor %}
+</ul>
+<p>
+    <a href="{% url 'form' %}">BACK</a>
+</p>
