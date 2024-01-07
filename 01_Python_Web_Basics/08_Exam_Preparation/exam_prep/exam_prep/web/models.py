@@ -1,7 +1,10 @@
+from enum import Enum
+
 from django.core.validators import MinLengthValidator, MinValueValidator
 from django.db import models
 
-from exam_prep.web.model_validators import username_validator
+from exam_prep.web.model_mixins import ChoicesEnumMixin
+from exam_prep.web.model_validators import alphanumeric_validator
 
 
 class Profile(models.Model):
@@ -12,7 +15,7 @@ class Profile(models.Model):
         max_length=MAX_USERNAME_LENGTH,
         validators=(
             MinLengthValidator(MIN_USERNAME_LENGTH),
-            username_validator,
+            alphanumeric_validator,
         ),
         null=False,
         blank=False,
@@ -28,23 +31,29 @@ class Profile(models.Model):
         blank=True,
     )
 
+    def __str__(self):
+        return self.username
+
+
+class AlbumGenres(ChoicesEnumMixin):
+    POP = "Pop Music"
+    JAZZ = "Jazz Music"
+    RNB = "R&B Music"
+    ROCK = "Rock Music"
+    COUNTRY = "Country Music"
+    DANCE = "Dance Music"
+    HIP_HOP = "Hip Hop Music"
+    OTHER = "Other"
+
 
 class Album(models.Model):
+    class Meta:
+        ordering = ('pk',)
+
     MAX_NAME_LENGTH = 30
     MAX_ARTIST_LENGTH = 30
     MAX_GENRE_LENGTH = 30
     MIN_PRICE = 0.0
-
-    GENRE_CHOISES = (
-        (1, 'Pop Music'),
-        (2, 'Jazz Music'),
-        (3, 'R&B Music'),
-        (4, 'Rock Music'),
-        (5, 'Country Music'),
-        (6, 'Dance Music'),
-        (7, 'Hip Hop Music'),
-        (8, 'Other')
-    )
 
     name = models.CharField(
         max_length=MAX_NAME_LENGTH,
@@ -61,7 +70,7 @@ class Album(models.Model):
 
     genre = models.CharField(
         max_length=MAX_GENRE_LENGTH,
-        choices=GENRE_CHOISES,
+        choices=AlbumGenres.choices(),
         null=False,
         blank=False,
     )
@@ -71,15 +80,18 @@ class Album(models.Model):
         blank=True,
     )
 
-    image_url = models.ImageField(
+    image_url = models.URLField(
         null=False,
         blank=False,
     )
 
     price = models.FloatField(
-        null=False,
-        blank=False,
         validators=(
             MinValueValidator(MIN_PRICE),
         ),
+        null=False,
+        blank=False,
     )
+
+    def __str__(self):
+        return self.name

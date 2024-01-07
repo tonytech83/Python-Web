@@ -69,6 +69,7 @@
 .card-box > img {
     display: block;
     width: 250px;
+    height: 250px;
     border-radius: 15px;
 
 }
