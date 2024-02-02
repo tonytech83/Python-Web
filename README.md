@@ -13,6 +13,7 @@ In the "Python Web" module, the foundation of web-based technologies and the mos
 ## Language
 
 - `Python`
+- `Django Template Language`
 - `HTML`
 - `CSS`
 
