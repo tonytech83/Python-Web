@@ -25,35 +25,56 @@ Function Base View
 #         # }
 #     )
 
-def index(request):
-    # Search without `Form`
-    # can be used from address bar `http://127.0.0.1:8000/?filter=`
-    # after filter we past title of task
-    title_filter = request.GET.get('title_filter', None)
+# def index(request):
+#     # Search without `Form`
+#     # can be used from address bar `http://127.0.0.1:8000/?filter=`
+#     # after filter we past title of task
+#     title_filter = request.GET.get('title_filter', None)
+#
+#     tasks = Task.objects.all()
+#
+#     if title_filter:
+#         tasks = tasks.filter(title__icontains=title_filter.lower())
+#
+#     if not tasks:
+#         return HttpResponse('<h1>No tasks found!!!</h1>')
+#
+#     result = []
+#     [result.append(
+#         f"""
+#         <li>
+#         <h2>{t.title}</h2>
+#         <p>{t.description}</p>
+#         </li>
+#         """
+#     ) for t in tasks]
+#
+#     ul = f'<ul>{"".join(result)}</ul>'
+#
+#     content = f"""
+#     <h1>{len(tasks)}Tasks</h1>
+#     {ul}
+#     """
+#
+#     return HttpResponse(content)
 
+def index(request):
+
+    # This is only to show middleware
+    print('In the view')
+
+    title_filter = request.GET.get('title_filter', '')
     tasks = Task.objects.all()
 
     if title_filter:
         tasks = tasks.filter(title__icontains=title_filter.lower())
 
-    if not tasks:
-        return HttpResponse('<h1>No tasks found!!!</h1>')
+    content = {
+        'title': 'Task application',
+        'message': 'You should HODL your Bitcoin!',
+        'tasks': tasks,
+        'tasks_count': tasks.count(),
+        'title_filter': title_filter,
+    }
 
-    result = []
-    [result.append(
-        f"""
-        <li>
-        <h2>{t.title}</h2>
-        <p>{t.description}</p>
-        </li>
-        """
-    ) for t in tasks]
-
-    ul = f'<ul>{"".join(result)}</ul>'
-
-    content = f"""
-    <h1>{len(tasks)}Tasks</h1>
-    {ul}
-    """
-
-    return HttpResponse(content)
+    return render(request, 'tasks/index.html', content)

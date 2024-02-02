@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>{{ title }}</h1>
+<hr>
+{% if tasks_count == 0 %}
+    <h3>No Tasks!</h3>
+{% elif tasks_count == 1 %}
+    <h3>Task is: </h3>
+{% else %}
+    <h3>Tasks are: {{ tasks_count }}</h3>
+{% endif %}
+
+<form action="/" method="GET">
+    <label>
+        <input type="text" name="title_filter" value="{{ title_filter }}" placeholder="Enter filter" />
+    </label>
+    <button>Search</button>
+</form>
+
+<ul>
+    {% for task in tasks %}
+        <li><strong>{{ task.title }}</strong> - {{ task.description }}</li>
+    {% endfor %}
+</ul>
+<hr>
+<p>{{ message }}</p>
+</body>
+</html>
