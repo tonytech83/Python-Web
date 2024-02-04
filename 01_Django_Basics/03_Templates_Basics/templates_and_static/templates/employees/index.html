@@ -1,100 +1,93 @@
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <style>
-        body {
-            padding: 20px;
-        }
+{% extends 'base.html' %}
+{% load static %}
 
-        .young {
-            color: green;
-        }
+{% block content %}
+    <h1>{{ title }}</h1>
 
-        .adult {
-            color: dodgerblue;
-        }
-    </style>
-    <title>Document</title>
-</head>
-<body>
-<h1>{{ title }}</h1>
+    <hr>
+    <h1>Static files</h1>
+    <img class="cat-image" src="{% static 'images/cat.jfif' %}" alt="the cat">
 
-<ul>
-    {% for age in ages_list %}
-        <li>
-            <a href="{% url 'employee_details' pk=age %}">{{ age }}</a>
-        </li>
-    {% endfor %}
-</ul>
+    <hr>
 
-<h2>Params for link above: {{ get_params }}</h2>
-<hr>
-
-<a href="{% url 'employee_details' pk=7 %}">Go to employee with pk=7</a>
-
-<hr>
-
-<h1>Dictionary methods</h1>
-<h2>First name: {{ person.first_name }}</h2>
-<h2>Last name: {{ person.last_name }}</h2>
-<h2>{{ person.items }}</h2>
-<h2>{{ person.values }}</h2>
-<h2>object `__dict__` method: {{ person_dict }}</h2>
-
-<hr>
-
-<h1>From `class`</h1>
-<h2>Full name: {{ person_obj.full_name }}</h2>
-
-<hr>
-
-<h1>Filters</h1>
-<h2>Truncate: {{ person_obj.full_name|truncatechars:3 }}</h2>
-<h2>Join: {{ names_list|join:'; ' }}</h2>
-<h2>Date: {{ today|date:'D d M Y' }}</h2>
-<h2>Default: {{ person_obj.age|default:"no age" }}</h2>
-<h2>Length: {{ person|length }}</h2>
-<h2>Random: {{ names_list|random }}</h2>
-<h2>Upper: {{ person_obj.full_name|upper }}</h2>
-
-<hr>
-
-<h1>Build-in tags</h1>
-
-<h2>if-elif-else:</h2>
-{% if ages_list %}
-    <p>{{ ages_list|join:'; ' }}</p>
-{% else %}
-    <p>Empty ages list</p>
-{% endif %}
-
-<h2>for:</h2>
-<ul>
-    {% for age in ages_list %}
-        {% if age < 18 %}
-            <li class="young">
-                <strong>age: {{ age }}</strong>
+    <ul>
+        {% for age in ages_list %}
+            <li>
+                <a href="{% url 'employee_details' pk=age %}">{{ age }}</a>
             </li>
-        {% else %}
-            <li class="adult">
-                <strong>age: {{ age }}</strong>
-            </li>
-        {% endif %}
-    {% endfor %}
-</ul>
+        {% endfor %}
+    </ul>
 
-<h2>for-empty</h2>
-<ul>
-    {% for age in ages_empty %}
-        <strong>{{ age }}</strong>
-    {% empty %}
-        <strong>Empty list!</strong>
-    {% endfor %}
-</ul>
+    <h2>Params for link above: {{ get_params }}</h2>
+    <hr>
 
-</body>
-</html>
+    <a href="{% url 'employee_details' pk=7 %}">Go to employee with pk=7</a>
+
+    <hr>
+
+    <h1>Dictionary methods</h1>
+    <h2>First name: {{ person.first_name }}</h2>
+    <h2>Last name: {{ person.last_name }}</h2>
+    <h2>{{ person.items }}</h2>
+    <h2>{{ person.values }}</h2>
+    <h2>object `__dict__` method: {{ person_dict }}</h2>
+
+    <hr>
+
+    <h1>From `class`</h1>
+    <h2>Full name: {{ person_obj.full_name }}</h2>
+
+    <hr>
+
+    <h1>Filters</h1>
+    <h2>Truncate: {{ person_obj.full_name|truncatechars:3 }}</h2>
+    <h2>Join: {{ names_list|join:'; ' }}</h2>
+    <h2>Date: {{ today|date:'D d M Y' }}</h2>
+    <h2>Default: {{ person_obj.age|default:"no age" }}</h2>
+    <h2>Length: {{ person|length }}</h2>
+    <h2>Random: {{ names_list|random }}</h2>
+    <h2>Upper: {{ person_obj.full_name|upper }}</h2>
+
+    <hr>
+
+    <h1>Build-in tags</h1>
+
+    <h2>if-elif-else:</h2>
+    {% if ages_list %}
+        <p>{{ ages_list|join:'; ' }}</p>
+    {% else %}
+        <p>Empty ages list</p>
+    {% endif %}
+
+    <h2>for:</h2>
+    <ul>
+        {% for age in ages_list %}
+            {% if age < 18 %}
+                <li class="young">
+                    <strong>age: {{ age }}</strong>
+                </li>
+            {% else %}
+                <li class="adult">
+                    <strong>age: {{ age }}</strong>
+                </li>
+            {% endif %}
+        {% endfor %}
+    </ul>
+
+    <h2>for-empty</h2>
+    <ul>
+        {% for age in ages_empty %}
+            <strong>{{ age }}</strong>
+        {% empty %}
+            <strong>Empty list!</strong>
+        {% endfor %}
+    </ul>
+
+    <h2>lorem ipsum</h2>
+    {% lorem 3 %}
+
+    <hr>
+    <h1>CSRF token</h1>
+    <h3>Token value: {{ csrf_token }}</h3>
+
+{% endblock %}

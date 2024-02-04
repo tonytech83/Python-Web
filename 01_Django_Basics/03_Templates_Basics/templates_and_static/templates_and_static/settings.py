@@ -98,7 +98,17 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
-STATIC_URL = 'static/'
+# Base url for access
+# if DEBUG is True static files are hosted on local, else hosted on web
+STATIC_URL = 'static/' if DEBUG else 'https://softuni.bg'
+
+# execute in Django console `collectstatic` will collect all static files from registered apps in `INSTALLED_APPS`
+STATIC_ROOT = BASE_DIR / 'staticfiles_compiled'
+
+# The place on local disk where the static files are:
+STATICFILES_DIRS = (
+    BASE_DIR / 'staticfiles',
+)
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
