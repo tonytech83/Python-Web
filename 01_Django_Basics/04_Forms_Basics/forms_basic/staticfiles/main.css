@@ -1,0 +1,16 @@
+.wrapper {
+    display: flex;
+    gap: 50px;
+    justify-content: center;
+    margin-top: 50px;
+}
+
+label {
+    font-weight: bold;
+}
+
+.only_inputs,
+.django_form {
+    background: lightgray;
+    padding: 20px;
+}

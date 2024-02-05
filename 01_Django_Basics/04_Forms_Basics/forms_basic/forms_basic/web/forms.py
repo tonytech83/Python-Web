@@ -13,3 +13,18 @@ class EmployeeForm(forms.Form):
         max_length=MAX_LENGTH_NAME,
         required=True,
     )
+
+    email = forms.EmailField(
+        # change the behaviour of field
+        # widget=forms.PasswordInput()
+    )
+
+    interests = forms.ChoiceField(
+        choices=(
+            ('Senior', 'Senior'),
+            ('Professional', 'Professional'),
+            ('Master', 'Master'),
+        ),
+    )
+
+    age = forms.IntegerField()
