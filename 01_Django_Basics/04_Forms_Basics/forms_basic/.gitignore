@@ -1,0 +1,5 @@
+/.env
+/.idea/
+/.idea/dataSources.xml
+__pycache__/
+/staticfiles_compiled

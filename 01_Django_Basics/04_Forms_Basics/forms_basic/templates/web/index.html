@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <style>
+        div {
+            margin: 10px;
+        }
+    </style>
+    <title>Document</title>
+</head>
+<body>
+
+{# By default action=CURRENT_URL, method=GET #}
+<form action="{% url 'index' %}" method="GET">
+    {# Form fields #}
+    <h2>Inputs</h2>
+    <div>
+        <label for="first_name">First name</label>
+        <input type="text" id="first_name" name="first_name"> {# single line text #}
+    </div>
+    <div>
+        <label for="age">Age</label>
+        <input type="number" id="age" name="age">
+    </div>
+    <div>
+        <label for="blog">Blog</label>
+        <input type="url" id="blog" name="blog">
+    </div>
+    <div>
+        <label for="personal_email">Personal email</label>
+        <input type="email" id="personal_email" name="personal_email">
+    </div>
+    <div>
+        <label for="range_field">Range field</label>
+        <input type="range" id="range_field" name="range_field">
+    </div>
+    <div>
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password">
+    </div>
+    <div>
+        <label for="hidden_field">Hidden field</label>
+        <input type="hidden" id="hidden_field" name="hidden_field">
+    </div>
+    <div>
+        <label for="gender">Gender</label>
+        <input type="radio" id="gender" name="gender">
+    </div>
+    <div>
+        <label for="interests">Interests</label>
+        <input type="checkbox" name="interests" id="interests">
+    </div>
+
+    <hr>
+    
+    {# TextArea #}
+    <h2>Textarea</h2>
+    <div>
+        <label for="description">Description</label>
+        <textarea id="description" name="description"></textarea> {# Multi-line text #}
+    </div>
+
+    <hr>
+    
+    {# Dropdowns #}
+    <h2>Dropdowns</h2>
+    <div>
+        <label for="sel">Select</label>
+        <select name="sel" id="sel">
+            <option value="Option 1">Gaming</option>
+            <option value="Option 2">Reading</option>
+            <option value="Option 3">Watching TV</option>
+            <option value="Option 4">Playing Football</option>
+        </select>
+    </div>
+
+    <hr>
+    {# Buttons #}
+    <h2>Buttons</h2>
+    
+    {# The `button` tag is mo semantic than `input` tag #}
+    <button>Send</button>
+    {# Old school:  #}
+    <input type="submit" value="Send">
+
+    {% csrf_token %}
+</form>
+
+
+</body>
+</html>
