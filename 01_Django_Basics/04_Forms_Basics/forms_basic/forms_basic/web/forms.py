@@ -67,3 +67,18 @@ class EmployeeForm(forms.ModelForm):
     class Meta:
         model = Employee
         fields = '__all__'
+
+        # help_texts
+        # error_messages
+        labels = {
+            'first_name': 'First Name:',
+            'last_name': 'Last Name:'
+        }
+
+        widgets = {
+            'role': forms.RadioSelect(
+                attrs={
+                    'disabled': False,
+                }
+            ),
+        }

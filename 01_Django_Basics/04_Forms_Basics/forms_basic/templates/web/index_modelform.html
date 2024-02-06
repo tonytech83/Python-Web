@@ -25,7 +25,7 @@
     <ul>
         {% for employee in employees_list %}
             <li>
-                {{ employee.full_name }} - {{ employee.role }}
+                {{ employee.full_name }} - {{ employee.department }}
                 <a href="{% url 'update-employee' pk=employee.pk %}">Edit</a>
             </li>
         {% endfor %}
