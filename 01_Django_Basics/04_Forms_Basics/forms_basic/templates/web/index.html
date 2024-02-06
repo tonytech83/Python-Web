@@ -104,7 +104,14 @@
             {% csrf_token %}
         </form>
     </div>
-</div>
+
+    {# Django ModelForm #}
+    <div class="django_modelform">
+        <h2>Django ModelForm</h2>
+        <p>
+            <a href="{% url 'model-form' %}">go to ModelForm</a>
+        </p>
+    </div>
 
 </body>
 </html>

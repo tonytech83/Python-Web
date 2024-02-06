@@ -1,0 +1,35 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="{% static 'main.css' %}">
+    <title>Document</title>
+</head>
+<body>
+{# Django ModelForm #}
+<div class="django_modelform">
+    <h2>Django ModelForm</h2>
+    <form action="{% url 'model-form' %}" method="POST">
+        {{ form.as_p }}
+
+        <button>Send to DB</button>
+
+        {% csrf_token %}
+    </form>
+
+    <h2>Employees List:</h2>
+    <ul>
+        {% for employee in employees_list %}
+            <li>
+                {{ employee.full_name }} - {{ employee.role }}
+                <a href="{% url 'update-employee' pk=employee.pk %}">Edit</a>
+            </li>
+        {% endfor %}
+    </ul>
+</div>
+</body>
+</html>

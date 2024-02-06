@@ -9,8 +9,7 @@ label {
     font-weight: bold;
 }
 
-.only_inputs,
-.django_form {
+.only_inputs, .django_form, .django_modelform {
     background: lightgray;
     padding: 20px;
 }
