@@ -1,7 +1,27 @@
 {% extends 'base.html' %}
 
+{% load number_filters %}
+
+{% block page_title %} Home {% endblock %}
+
+{% block body_end_scripts %}
+    <script>
+        setTimeout(() => {
+            document.body.innerHTML += '<h2>After 2 seconds</h2>';
+        }, 2000)
+    </script>
+{% endblock %}
+
 {% block main_content %}
 
+    <h2>The cat name is: {{ cat_name }}</h2>
     <img width="250px" src="{{ cat_image }}" alt="cat">
-    
-{%  endblock %}
+    <p><strong>All numbers:</strong> {{ numbers }}</p>
+    {# to use our custom filters we should load our custom library #}
+    {# in this case the library is `number_filters` #}
+    <p><strong>Only Odd numbers:</strong> {{ numbers|only_odd }}</p>
+    <p><strong>Only Even numbers:</strong> {{ numbers|only_even }}</p>
+    <p><strong>Only positive numbers:</strong> {{ numbers|only_positive }}</p>
+    <p><strong>Only negative numbers:</strong> {{ numbers|only_negative }}</p>
+
+{% endblock %}

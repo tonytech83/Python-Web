@@ -1,0 +1,21 @@
+<nav>
+    <ul>
+        <li><a href="{% url 'index' %}">Index</a></li>
+        <li><a href="{% url 'about' %}">About</a></li>
+        <li> Login User:
+            {# included templates have access to the view context #}
+            {% if request.user.is_authenticated %}
+                {{ request.user }}
+            {% else %}
+                Anonymous
+            {% endif %}
+        </li>
+        <li> Included template title: 
+            {% if title %}
+                {{ title }}
+            {% else %}
+                This template has no title 
+            {% endif %}
+        </li>
+    </ul>
+</nav>
