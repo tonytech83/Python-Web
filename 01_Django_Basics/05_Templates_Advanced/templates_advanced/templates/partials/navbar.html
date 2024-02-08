@@ -1,15 +1,24 @@
+{% load user_tags %}
 <nav>
     <ul>
         <li><a href="{% url 'index' %}">Index</a></li>
         <li><a href="{% url 'about' %}">About</a></li>
         <li> Login User:
             {# included templates have access to the view context #}
-            {% if request.user.is_authenticated %}
-                {{ request.user }}
-            {% else %}
-                Anonymous
-            {% endif %}
+{#            {% if request.user.is_authenticated %}#}
+{#                {{ request.user }}#}
+{#            {% else %}#}
+{#                Anonymous#}
+{#            {% endif %}#}
+            
+            {# above code can be replaced with `inclusion_tag` #}
+            {# the html goes to new template, in this case `profile_avatar.html` #}
+            {% get_profile_avatar %}
         </li>
+    <li>
+        Initials:
+        {% get_user_initials %}
+    </li>
         <li> Included template title: 
             {% if title %}
                 {{ title }}

@@ -1,5 +1,9 @@
 {% extends 'base.html' %}
 
+{# load custom tags #}
+{% load list_tags %}
+
+{# load custom filters #}
 {% load number_filters %}
 
 {% block page_title %} Home {% endblock %}
@@ -13,9 +17,15 @@
 {% endblock %}
 
 {% block main_content %}
+    {# custom simple tag #}
+    <h2>Current time: {% current_time %}</h2>
 
     <h2>The cat name is: {{ cat_name }}</h2>
+
+
     <img width="250px" src="{{ cat_image }}" alt="cat">
+
+    <h2>Numbers:</h2>
     <p><strong>All numbers:</strong> {{ numbers }}</p>
     {# to use our custom filters we should load our custom library #}
     {# in this case the library is `number_filters` #}
@@ -23,5 +33,16 @@
     <p><strong>Only Even numbers:</strong> {{ numbers|only_even }}</p>
     <p><strong>Only positive numbers:</strong> {{ numbers|only_positive }}</p>
     <p><strong>Only negative numbers:</strong> {{ numbers|only_negative }}</p>
+
+    <h2>Numbers with tag</h2>
+    <p><strong>All numbers:</strong> {% list_of numbers %}</p>
+    {# to use our custom filters we should load our custom library #}
+    {# in this case the library is `number_filters` #}
+    <p><strong>Only Odd numbers:</strong> {{ numbers|only_odd }}</p>
+    <p><strong>Only Even numbers:</strong> {{ numbers|only_even }}</p>
+    <p><strong>Only positive numbers:</strong> {{ numbers|only_positive }}</p>
+    <p><strong>Only negative numbers:</strong> {{ numbers|only_negative }}</p>
+
+
 
 {% endblock %}
