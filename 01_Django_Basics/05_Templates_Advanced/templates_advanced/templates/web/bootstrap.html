@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block styles %}
+    {% if has_bootstrap %}
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+              integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+              crossorigin="anonymous">
+    {% endif %}
+{% endblock %}
+
+{% block main_content %}
+    <h2>Buttons:</h2>
+    <p>Default link without bootstrap -> <a href="#">Link</a></p>
+    <p>Link with class <strong>.btn</strong> -><a href="#" class="btn">Link</a></p>
+    <p>Link with class <strong>.btn</strong> and <strong>.btn-success</strong> -><a href="#"
+                                                                                    class="btn btn-success">Link</a></p>
+
+    <h2>Forms:</h2>
+    <form action="">
+        <label>
+            A text
+            <input type="text" class="form-control">
+        </label>
+        <label>
+            A number
+            <input type="number" class="form-control">
+        </label>
+        <label>
+            A dropdown
+            <select class="form-select">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+            </select>
+        </label>
+    </form>
+{% endblock %}
