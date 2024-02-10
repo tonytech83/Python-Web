@@ -1,0 +1,85 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+    <title>Document</title>
+</head>
+<body>
+
+<div>
+    <ul>
+        {% for person in persons_list %}
+            <li>
+                {% if person.profile_image %}
+                    <img src="{{ person.profile_image.url }}" alt="image of {{ person.pk }}">
+                {% else %}
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ-PIdW95i81kOasD47AQhyz-Lb_5hw9uTXqv0wupXCtw&s"
+                         alt="">
+                {% endif %}
+                {{ person.first_name }} {{ person.last_name }}
+            </li>
+        {% endfor %}
+    </ul>
+</div>
+
+<div class="wrapper">
+    <div class="left">
+        <h2>form with class ModelForm</h2>
+
+        <h4>Create form</h4>
+
+        {# with `enctype=` we tell the browser to send the files #}
+        <form action="{% url 'create-person' %}" method="POST" enctype="multipart/form-data">
+            {{ person_form.as_p }}
+
+            <button>Create</button>
+
+            {% csrf_token %}
+        </form>
+
+        <br>
+        <hr>
+        <br>
+
+        <h4>Update form with one read-only filed</h4>
+
+        <form action="{% url 'index' %}" method="POST">
+            {{ update_person_form.as_p }}
+        </form>
+
+        <br>
+        <hr>
+        <br>
+
+        <h4>Form with only read-only fields</h4>
+        <h4>done by mixin inherited by the form</h4>
+
+        <form action="{% url 'index' %}" method="POST">
+            {{ readonly_person_form.as_p }}
+        </form>
+
+    </div>
+    <div class="right">
+        <h2>form with `modelform_factory`</h2>
+        <h4>Create form</h4>
+        <form action="{% url 'index' %}" method="POST">
+            {{ mff_form.as_p }}
+
+            <button>B-ton</button>
+
+            {% csrf_token %}
+        </form>
+
+    </div>
+</div>
+</body>
+</html>
+
+
+
+

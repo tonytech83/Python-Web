@@ -1,0 +1,12 @@
+.wrapper {
+    display: flex;
+    gap: 50px;
+}
+
+.form-control {
+    border: 3px solid red;
+}
+
+img {
+    height: 50px;
+}
