@@ -1,0 +1,8 @@
+<h2>All ToDos:</h2>
+<ul>
+    {% for todo in todo_list %}
+        <li>
+            {{ todo.title }} - {{ todo.deadline }}
+        </li>
+    {% endfor %}
+</ul>

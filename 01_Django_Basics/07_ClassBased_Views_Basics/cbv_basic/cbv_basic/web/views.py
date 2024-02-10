@@ -98,10 +98,35 @@ class TodoCreateView(views.CreateView):
 
         return form
 
+    # relations happens in `form_valid`
+    def form_valid(self, form):
+        # additional validation - Better to have custom Form for this
+        return super().form_valid(form)
+
+    # to modify `context`
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        # addition variables or ...
+        context['todo_list'] = Todo.objects.all()
+
+        return context
+
+
 # - UpdateView
 
+# - DeleteView
 
 # - DetailsView
 class TodoDetailsView(views.DetailView):
     model = Todo
     template_name = 'web/details_todo.html'
+
+
+# - ListView
+class TodoListView(views.ListView):
+    model = Todo
+    template_name = 'web/list_todos.html'
+
+    def get_queryset(self):
+        return super().get_queryset().filter(deadline__lte=datetime.date.today())

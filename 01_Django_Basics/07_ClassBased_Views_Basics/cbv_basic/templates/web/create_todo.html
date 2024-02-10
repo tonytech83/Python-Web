@@ -1,3 +1,15 @@
+<h2>Created Todos:</h2>
+<ul>
+    {% for todo in todo_list %}
+        <li>
+            <strong>{{ todo.title }}</strong> - {{ todo.date_created }} - {{ todo.deadline }}
+        </li>
+    {% endfor %}
+</ul>
+
+<hr>
+
+<h2>Create new ToDo:</h2>
 <form action="{% url 'create-todo' %}" method="POST">
     {{ form.as_p }}
 
@@ -5,3 +17,4 @@
 
     {% csrf_token %}
 </form>
+
