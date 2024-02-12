@@ -1,0 +1,28 @@
+body {
+    font-family: "Segoe UI", system-ui, sans-serif;
+}
+
+.nav {
+    display: flex;
+    gap: 10px;
+    list-style-type: none;
+    margin: 0 0 20px 0;
+    background: darkgray;
+    padding: 10px;
+}
+
+a {
+    text-decoration: none;
+    font-weight: bold;
+    color: black;
+}
+
+a:hover {
+    color: white;
+    background: black;
+    padding: 0 8px 2px 8px;
+}
+
+form {
+    margin-bottom: 20px;
+}

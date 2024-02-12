@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <form action="{% url 'todos-list' %}" method="GET">
+        {{ filter_form }}
+
+        <Button>Search</Button>
+    </form>
+
+    <h1>{{ title }}</h1>
+
+    {# {{ object_list }} and {{ todo_list }} are equal #}
+    <ul>
+        {% for todo in object_list %}
+            <li>
+                {{ todo.title }}
+            </li>
+        {% endfor %}
+    </ul>
+
+{% endblock %}
