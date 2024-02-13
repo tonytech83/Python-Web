@@ -19,7 +19,7 @@ In the "Python Web" module, the foundation of web-based technologies and the mos
 
 ## Judge System
 
-TODO
+- `No judge system`
 
 ## Table of Contents:
 
@@ -30,7 +30,14 @@ In the Django Basics course, the foundations of Web programming with Python and 
 The training includes practical exercises (labs) and workshops for building comprehensive, fully functional Django web applications.
 </h5>
 
-TODO
+- [`Django Introduction`](https://github.com/tonytech83/Python-Web/tree/main/01_Django_Basics/01_Django_Introduction/django_intro)
+- [`URLs and Views`](https://github.com/tonytech83/Python-Web/tree/main/01_Django_Basics/02_URLs_and_Views/urls_and_views)
+- [`Templates Basics`](https://github.com/tonytech83/Python-Web/tree/main/01_Django_Basics/03_Templates_Basics/templates_and_static)
+- [`Forms Basics`](https://github.com/tonytech83/Python-Web/tree/main/01_Django_Basics/04_Forms_Basics/forms_basic)
+- [`Templates Advanced`](https://github.com/tonytech83/Python-Web/tree/main/01_Django_Basics/05_Templates_Advanced/templates_advanced)
+- [`Forms Advanced`](https://github.com/tonytech83/Python-Web/tree/main/01_Django_Basics/06_Forms_Advanced/forms_advanced)
+- [`Class-Based Views Basics`](https://github.com/tonytech83/Python-Web/tree/main/01_Django_Basics/07_ClassBased_Views_Basics/cbv_basic)
+- [`Class-Based Views Advanced`](https://github.com/tonytech83/Python-Web/tree/main/01_Django_Basics/08_ClassBased_Views_Advanced/cbv_advanced)
 
 ### 2. Django Advanced
 
