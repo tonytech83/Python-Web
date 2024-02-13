@@ -2,7 +2,7 @@ from django import forms
 
 from django.urls import reverse_lazy
 from django.views import generic as views
-from django.views.generic import DetailView
+
 
 from cbv_advanced.web.models import Todo
 
@@ -103,3 +103,18 @@ class DetailTodoView(views.DetailView):
     # Minimum
     model = Todo
     template_name = 'web/detail_todo.html'
+
+    # Optional
+    slug_field = 'slug'
+    query_pk_and_slug = True  # takes with both `pk` and `slug`
+
+    # Overwrites:
+    # - additional filter before filter by slug, because slug can be not unique
+    def get_queryset(self):
+        queryset = super().get_queryset()
+
+        tenant = self.request.GET.get('tenant', None)
+        if tenant is not None:
+            queryset = queryset.filter(tenant=tenant)
+
+        return queryset

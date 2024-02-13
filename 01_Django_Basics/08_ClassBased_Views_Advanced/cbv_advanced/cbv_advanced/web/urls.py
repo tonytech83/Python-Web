@@ -7,4 +7,6 @@ urlpatterns = (
 
     path('create/', CreateTodoView.as_view(), name='todo-create'),
     path('detail/<int:pk>/', DetailTodoView.as_view(), name='todo-detail'),
+    path('detail/<slug:slug>/', DetailTodoView.as_view(), name='todo-detail'),
+    path('detail/<int:pk>/<slug:slug>/', DetailTodoView.as_view(), name='todo-detail'),
 )
