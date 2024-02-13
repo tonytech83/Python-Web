@@ -2,6 +2,7 @@ from django import forms
 
 from django.urls import reverse_lazy
 from django.views import generic as views
+from django.views.generic import DetailView
 
 from cbv_advanced.web.models import Todo
 
@@ -24,7 +25,7 @@ class CreateTodoView(views.CreateView):
     success_url = reverse_lazy('todos-list')  # optional, but it is good to be used. Ather option is from Model
 
 
-# Example of filter with Form
+# Example for filter with Form
 class FilterTodoForm(forms.Form):
     title_pattern = forms.CharField(
         max_length=Todo.MAX_TITLE_LENGTH,
@@ -41,6 +42,9 @@ class ListTodoView(views.ListView):
     # Minimum
     model = Todo
     template_name = 'web/list_todo.html'
+
+    # Pagination - Static way
+    paginate_by = 3
 
     # Overwrites:
     # - add additional variable in context
@@ -82,9 +86,20 @@ class ListTodoView(views.ListView):
 
         return queryset
 
-    # Additional func to take `title_pattern`
+    # Additional func to take `title_pattern` and `is_done`
     def _get_title_pattern(self):
         return self.request.GET.get('title_pattern', None)
 
     def _get_is_done_filter(self):
         return self.request.GET.get('is_done', None) == 'on'
+
+    # Paginator - Dynamic way / needs js
+    # def get_paginate_by(self, queryset=None):
+    #     pass
+
+
+# Detail View
+class DetailTodoView(views.DetailView):
+    # Minimum
+    model = Todo
+    template_name = 'web/detail_todo.html'
