@@ -3,7 +3,6 @@ from django import forms
 from django.urls import reverse_lazy
 from django.views import generic as views
 
-
 from cbv_advanced.web.models import Todo
 
 """
@@ -37,14 +36,31 @@ class FilterTodoForm(forms.Form):
     )
 
 
-# ListView
+# Mixins:
+# - overwrites `get_queryset()` and returns limited number of items
+class LatestCreatedMixin:
+    latest_created_count = 3
+
+    def get_queryset(self):
+        return super().get_queryset().order_by('-pk')[:self.latest_created_count]
+
+
+# - LoginRequiredMixin - should be inhered by View
+
+
+# List View
 class ListTodoView(views.ListView):
     # Minimum
     model = Todo
     template_name = 'web/list_todo.html'
 
+    # inherited from `LatestCreatedMixin`
+    # latest_created_count = 5
+
     # Pagination - Static way
-    paginate_by = 3
+    # paginate_by = 5
+
+    default_paginate_by = 5
 
     # Overwrites:
     # - add additional variable in context
@@ -55,7 +71,7 @@ class ListTodoView(views.ListView):
         context['title'] = 'Todos list:'
         context['filter_form'] = FilterTodoForm(
             initial={
-                'title_pattern': self.request.GET.get('title_pattern')
+                'title_pattern': self._get_title_pattern(),
             }
         )
 
@@ -80,9 +96,9 @@ class ListTodoView(views.ListView):
         if title_pattern:
             queryset = queryset.filter(title__icontains=title_pattern)
 
-        is_done = self._get_is_done_filter()
-        if is_done is not None:
-            queryset = queryset.filter(is_done=is_done)
+        # is_done = self._get_is_done_filter()
+        # if is_done is not None:
+        #     queryset = queryset.filter(is_done=is_done)
 
         return queryset
 
@@ -94,8 +110,10 @@ class ListTodoView(views.ListView):
         return self.request.GET.get('is_done', None) == 'on'
 
     # Paginator - Dynamic way / needs js
-    # def get_paginate_by(self, queryset=None):
-    #     pass
+    def get_paginate_by(self, queryset=None):
+        paginate_by = self.request.GET.get('paginate_by', self.default_paginate_by)
+
+        return paginate_by
 
 
 # Detail View
@@ -118,3 +136,11 @@ class DetailTodoView(views.DetailView):
             queryset = queryset.filter(tenant=tenant)
 
         return queryset
+
+    # - Access control - Can be used for limitation to pages
+    # def dispatch(self, request, *args, **kwargs):
+    #     # pseudo code
+    #     if request.user.tenant != request.GET.get('tenant'):
+    #         raise ...
+    #
+    #     return super().dispatch(request, *args, **kwargs)
