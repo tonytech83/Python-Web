@@ -20,16 +20,16 @@
                         <p>{{ pet.name }}</p>
                         <!-- Pet Edit Button -->
                         <a href="{% url 'edit-pet' username='admin' pet_slug=pet.slug %}">
-                            <img class="edit-img" src="/static/images/edit-pen-icon-6.jpg" alt="edit button">
+                            <img class="edit-img" src="{% static '/images/edit-pen-icon-6.jpg' %}" alt="edit button">
                         </a>
                         <!-- Pet Delete Button -->
                         <a href="">
-                            <img class="bin-img" src="/static/images/icon-remove-22.jpg" alt="bin button">
+                            <img class="bin-img" src="{% static '/images/icon-remove-22.jpg' %}" alt="bin button">
                         </a>
                     </div>
                     <div class="data">
                         <!-- Pet Total Photos -->
-                        <span>4</span>
+                        <span>{{ pet.photo_set.count }}</span>
                         <p>photos</p>
                     </div>
                 </div>

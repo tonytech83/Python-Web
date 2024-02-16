@@ -5,9 +5,10 @@ from django.views import generic as auth_views
 from petstagram.pets.models import Pet
 
 
-class AddPetView(auth_views.DetailView):
+class AddPetView(auth_views.CreateView):
     model = Pet
     template_name = 'pets/pet-details-page.html'
+    fields = '__all__'
 
 
 class DeletePetView(auth_views.DeleteView):
