@@ -8,7 +8,7 @@
             </a>
 
             <!-- Link to Home Page -->
-            <a class="home" href="#">
+            <a class="home" href="{% url 'home-page' %}">
                 <i>Petstagram</i>
             </a>
         </div>
@@ -18,45 +18,48 @@
                 <li class="nav-item">
 
                     <!-- Link to Add Pet Page -->
-                    <a href="#">
+                    <a href="{% url 'add-pet' %}">
                         <i>Add Pet</i>
                     </a>
                 </li>
                 <li class="nav-item">
 
                     <!-- Link to Add Photo Page -->
-                    <a href="#">
+                    <a href="{% url 'add-photo' %}">
                         <i>Add Photo</i>
                     </a>
                 </li>
-                <li class="nav-item">
+                {% if request.user.is_authenticated %}
+                    <li class="nav-item">
 
-                    <!-- Link to Login Page -->
-                    <a href="{% url 'login' %}">
-                        <i>Login</i>
-                    </a>
-                </li>
-                <li class="nav-item">
+                        <!-- Link to Profile Page -->
+                        <a href="{% url 'profile-details' pk=request.user.pk %}">
+                            <i>Profile</i>
+                        </a>
+                    </li>
+                    <li class="nav-item">
 
-                    <!-- Link to Register Page -->
-                    <a href="{% url 'register' %}">
-                        <i>Register</i>
-                    </a>
-                </li>
-                <li class="nav-item">
+                        <!-- Lpg out -->
+                        <a href="{% url 'home-page' %}">
+                            <i>Log out</i>
+                        </a>
+                    </li>
+                {% else %}
+                    <li class="nav-item">
 
-                    <!-- Link to Profile Page -->
-                    <a href="#">
-                        <i>Profile</i>
-                    </a>
-                </li>
-                <li class="nav-item">
+                        <!-- Link to Login Page -->
+                        <a href="{% url 'login' %}">
+                            <i>Login</i>
+                        </a>
+                    </li>
+                    <li class="nav-item">
 
-                    <!-- Lpg out -->
-                    <a href="#">
-                        <i>Log out</i>
-                    </a>
-                </li>
+                        <!-- Link to Register Page -->
+                        <a href="{% url 'register' %}">
+                            <i>Register</i>
+                        </a>
+                    </li>
+                {% endif %}
             </ul>
         </div>
     </div>

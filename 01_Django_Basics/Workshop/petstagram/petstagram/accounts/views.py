@@ -36,12 +36,13 @@ class LoginView(auth_views.FormView):
 
 
 class ShowProfileDetailsView(auth_views.DetailView):
-    pass
+    model = User
+    template_name = 'accounts/profile-details-page.html'
 
 
 class EditProfileView(auth_views.UpdateView):
-    pass
+    template_name = 'accounts/profile-edit-page.html'
 
 
 class DeleteProfileView(auth_views.DeleteView):
-    pass
+    template_name = 'accounts/profile-delete-page.html'
