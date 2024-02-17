@@ -11,7 +11,13 @@ class HomePageView(auth_views.TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
 
+        pet_name_pattern = self.request.GET.get('pet_name_pattern', None)
+
         context['pet_photos'] = Photo.objects.all()
+
+        if pet_name_pattern:
+            context['pet_name_pattern'] = pet_name_pattern
+            context['pet_photos'] = context['pet_photos'].filter(tagged_pets__name__icontains=pet_name_pattern)
 
         return context
 

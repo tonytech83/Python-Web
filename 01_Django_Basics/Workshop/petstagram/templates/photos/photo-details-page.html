@@ -10,6 +10,41 @@
             {% include 'partials/pet-photo-list-item.html' with photo_obj=pet_photo %}
             <!-- End Pet Photo Post Section -->
 
+            <!-- Photo description -->
+            <p class="pet-details">{{ pet_photo.description }}</p>
+
+            <!-- Date of Publication or edit of the Photo -->
+            <h5 class="postTime">{{ pet_photo.date_of_publication }}</h5>
+
+            <!-- Start Comments Section -->
+            <div class="comments">
+                {% for comment in pet_photo.photocomment_set.all %}
+                    <div class="top">
+                        <div class="userDetails">
+                            <div class="comment-data">
+                                <div class="profilepic">
+                                    <div class="profile_img">
+                                        <div class="image">
+                                            <!-- User Profile Image -->
+                                            <img src="{% static 'images/person.png' %}" alt="img8">
+                                        </div>
+                                    </div>
+                                </div>
+                                <p>
+                                    <!-- Link to User Profile Details Page-->
+                                    <!-- User First and/or Last Name or username-->
+                                    <a href="{% url 'profile-details' pk=1 %}">Steven Ivanov</a>
+                                    <!-- User Comment -->
+                                    - {{ comment.text }}
+                                </p>
+                            </div>
+                            <span>{{ comment.date_time_of_publication }}</span>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+            <!-- End Comments Section -->
+
         </div>
     </div>
 
