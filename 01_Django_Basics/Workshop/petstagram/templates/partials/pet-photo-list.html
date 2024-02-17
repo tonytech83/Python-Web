@@ -2,7 +2,7 @@
 <!-- Start First Pet Photo Post -->
 
 {% for photo in photo_list %}
-    {% include 'partials/pet-list-item.html' with photo_obj=photo %}
+    {% include 'partials/pet-photo-list-item.html' with photo_obj=photo %}
 {% empty %}
     <img class="no-posts" src="{% static '/images/no_posts.png' %}" alt="no posts image">
 {% endfor %}
