@@ -46,7 +46,6 @@ class DetailsPetView(views.DetailView):
     # with `queryset` we can optimize the queries to DB
     queryset = (Pet.objects.all()
                 .prefetch_related('photo_set')
-                .prefetch_related('pet_set')
                 .prefetch_related('photo_set__tagged_pets'))
 
     template_name = 'pets/pet-details-page.html'

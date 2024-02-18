@@ -24,8 +24,8 @@
                 </a>
                 <br>
                 <!-- if the photo has location -->
-                {% if photo_obj.location %}
-                    <span>{{ photo_obj.location }}</span>
+                {% if photo.location %}
+                    <span>{{ photo.location }}</span>
                 {% endif %}
             </h3>
         </div>
@@ -33,8 +33,8 @@
     <!-- End User Details and Image Location -->
 
     <!-- Start Pet Photo -->
-    <div class="imgBx" id="photo-{{ photo_obj.pk }}">
-        <img src="/media/{{ photo_obj.photo }}" alt="post" class="cover">
+    <div class="imgBx" id="photo-{{ photo.pk }}">
+        <img src="/media/{{ photo.photo }}" alt="post" class="cover">
     </div>
     <!-- End Pet Photo -->
 
@@ -44,9 +44,9 @@
             <div class="left">
                 <!-- Start Like Button -->
                 <span class="heart">
-                                <a href="{% url 'like-pet-photo' pk=photo_obj.pk %}">
+                                <a href="{% url 'like-pet-photo' pk=photo.pk %}">
                                     <!-- if user has liked the photo -->
-                                    {% if photo_obj.photolike_set.count > 0 %}
+                                    {% if photo.photolike_set.count > 0 %}
                                         <i class="fa-solid fa-heart" style="color: #ed4040;"></i>
                                     {% else %}
                                         <!-- else -->
@@ -67,12 +67,12 @@
         <!-- End Like and Share Buttons -->
 
         <!-- Number of Likes per Photo -->
-        <p class="likes">{{ photo_obj.photolike_set.count }} likes</p>
+        <p class="likes">{{ photo.photolike_set.count }} likes</p>
 
 
         <!-- Start Tagged Pets -->
         <!-- Link to First Tagged Pet Details Page-->
-        {% for pet in photo_obj.tagged_pets.all %}
+        {% for pet in photo.tagged_pets.all %}
             <a href="{% url 'details-pet' username='admin' pet_slug=pet.slug %}">
                 <p class="message">
                     <b>{{ pet.name }}</b>
@@ -82,12 +82,12 @@
         <!-- End Tagged Pets -->
 
         <!-- Link to Photo Details Page -->
-        <a href="{% url 'detail-photo' pk=photo_obj.pk %}">
+        <a href="{% url 'detail-photo' pk=photo.pk %}">
             <h4 class="details">See details</h4>
         </a>
 
         <!-- Date of Publication -->
-        <h5 class="postTime">{{ photo_obj.date_of_publication|date:'d/m/Y' }}</h5>
+        <h5 class="postTime">{{ photo.date_of_publication|date:'d/m/Y' }}</h5>
 
   
         <!-- Start Add Comments Section -->

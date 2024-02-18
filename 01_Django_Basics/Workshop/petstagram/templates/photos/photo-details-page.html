@@ -5,20 +5,23 @@
 
     <div class="container">
         <div class="col-9">
+        
+
+            <a href="{% url 'edit-photo' pk=object.pk %}">Edit</a>
 
             <!-- Start Pet Photo Post Section -->
-            {% include 'partials/pet-photo-list-item.html' with photo_obj=pet_photo %}
+            {% include 'partials/pet-photo-list-item.html' with photo=object %}
             <!-- End Pet Photo Post Section -->
 
             <!-- Photo description -->
-            <p class="pet-details">{{ pet_photo.description }}</p>
+            <p class="pet-details">{{ object.description }}</p>
 
             <!-- Date of Publication or edit of the Photo -->
-            <h5 class="postTime">{{ pet_photo.date_of_publication }}</h5>
+            <h5 class="postTime">{{ object.date_of_publication }}</h5>
 
             <!-- Start Comments Section -->
             <div class="comments">
-                {% for comment in pet_photo.photocomment_set.all %}
+                {% for comment in object.photocomment_set.all %}
                     <div class="top">
                         <div class="userDetails">
                             <div class="comment-data">
