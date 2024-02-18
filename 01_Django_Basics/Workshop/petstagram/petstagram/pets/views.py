@@ -1,4 +1,3 @@
-from django.shortcuts import get_object_or_404
 from django.urls import reverse, reverse_lazy
 from django.views import generic as views
 

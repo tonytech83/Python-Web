@@ -24,13 +24,13 @@ def create_button(context, check_func, result_func, arrow_class_name):
     }
 
 
-@register.inclusion_tag("common/tags/prev_button.html", takes_context=True)
+@register.inclusion_tag("common/tags/button.html", takes_context=True)
 def prev_button(context):
     page_obj = context['page_obj']
     return create_button(context, page_obj.has_previous, page_obj.previous_page_number, "fa-arrow-left")
 
 
-@register.inclusion_tag("common/tags/prev_button.html", takes_context=True)
+@register.inclusion_tag("common/tags/button.html", takes_context=True)
 def next_button(context):
     page_obj = context['page_obj']
     return create_button(context, page_obj.has_next, page_obj.next_page_number, "fa-arrow-right")
