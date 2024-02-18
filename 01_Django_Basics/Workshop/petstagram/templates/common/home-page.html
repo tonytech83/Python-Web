@@ -8,7 +8,8 @@
 
             <!-- Start Searchbar Form -->
             <form class="searchbar" action="{% url 'home-page' %}" method="GET">
-                <input type="text" name="pet_name_pattern" placeholder="Search by pet name..." value="{{ pet_name_pattern }}">
+                <input type="text" name="pet_name_pattern" placeholder="Search by pet name..."
+                       value="{{ pet_name_pattern }}">
                 <button>
                     <img src="{% static '/images/search.png' %}" height="18" alt="img2">
                 </button>
@@ -17,9 +18,50 @@
 
             <!-- Start Pet Photos Post Section -->
 
-            {% include 'partials/pet-photo-list.html' with photo_list=pet_photos %}
+            {% include 'partials/pet-photo-list.html' with photo_list=object_list %}
 
             <!-- End Pet Photos Post Section -->
+
+            <!-- Start Pagination -->
+            <div class="pagination">
+                <span class="current">
+                        Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
+                </span>
+
+                <span class="step-links-buttons">
+                
+                    <!-- If there are previous and next photos -->
+                    {% if page_obj.has_previous and page_obj.has_next %}
+                        <a href="?page={{ page_obj.previous_page_number }}">
+                            <i class="fa-solid fa-arrow-left"></i>
+                        </a>
+                        <a href="?page={{ page_obj.next_page_number }}">
+                            <i class="fa-solid fa-arrow-right"></i>
+                        </a>
+                        
+                    <!-- If there are only previous photos -->
+                    {% elif page_obj.has_previous %}
+                        <a href="?page={{ page_obj.previous_page_number }}">
+                            <i class="fa-solid fa-arrow-left"></i>
+                        </a>
+                        <a class="disabled" href="#">
+                            <i class="fa-solid fa-arrow-right"></i>
+                        </a>
+
+                    <!-- If there are only next photos -->
+                    {% elif page_obj.has_next %}
+                        <a class="disabled" href="#">
+                            <i class="fa-solid fa-arrow-left"></i>
+                        </a>
+                        <a href="?page={{ page_obj.next_page_number }}">
+                            <i class="fa-solid fa-arrow-right"></i>
+                        </a>
+                    {% endif %}
+                
+                </span>
+            </div>
+            <!-- End Pagination -->
+
 
         </div>
     </div>

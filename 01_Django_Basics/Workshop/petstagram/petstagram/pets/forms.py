@@ -34,6 +34,7 @@ class PetEditForm(ReadOnlyFieldsFormMixin, PetBaseForm):
 
         self._apply_readonly_fields()
 
+        # the rows bellow are replaced by `self._apply_readonly_fields()`
         # self.fields['date_of_birth'].widget.attrs['readonly'] = True
         # self.fields['date_of_birth'].widget.attrs['disabled'] = True
 

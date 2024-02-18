@@ -10,26 +10,26 @@
                 <div class="profile_img">
                     <div class="image">
                         <!-- Pet URL Image -->
-                        <img src="{{ pet.pet_photo }}"
+                        <img src="{{ object.pet_photo }}"
                              alt="img8">
                     </div>
                 </div>
                 <div class="personal">
                     <div class="edit">
                         <!-- Pet Name -->
-                        <p>{{ pet.name }}</p>
+                        <p>{{ object.name }}</p>
                         <!-- Pet Edit Button -->
-                        <a href="{% url 'edit-pet' username='admin' pet_slug=pet.slug %}">
+                        <a href="{% url 'edit-pet' username='admin' pet_slug=object.slug %}">
                             <img class="edit-img" src="{% static '/images/edit-pen-icon-6.jpg' %}" alt="edit button">
                         </a>
                         <!-- Pet Delete Button -->
-                        <a href="{% url 'delete-pet' username='admin' pet_slug=pet.slug %}">
+                        <a href="{% url 'delete-pet' username='admin' pet_slug=object.slug %}">
                             <img class="bin-img" src="{% static '/images/icon-remove-22.jpg' %}" alt="bin button">
                         </a>
                     </div>
                     <div class="data">
                         <!-- Pet Total Photos -->
-                        <span>{{ pet.photo_set.count }}</span>
+                        <span>{{ object.photo_set.count }}</span>
                         <p>photos</p>
                     </div>
                 </div>
@@ -39,7 +39,7 @@
 
         <div class="pet-posts">
 
-            {% include 'partials/pet-photo-list.html' with photo_list=pet.photo_set.all %}
+            {% include 'partials/pet-photo-list.html' with photo_list=object.photo_set.all %}
 
         </div>
     </div>

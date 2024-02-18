@@ -4,6 +4,7 @@ from django.template.defaultfilters import slugify
 
 class Pet(models.Model):
     MAX_NAME_LENGTH = 30
+    MAX_URL_LENGTH = 300
 
     name = models.CharField(
         max_length=MAX_NAME_LENGTH,
@@ -12,6 +13,7 @@ class Pet(models.Model):
     )
 
     pet_photo = models.URLField(
+        max_length=MAX_URL_LENGTH,
         null=False,
         blank=False,
     )
