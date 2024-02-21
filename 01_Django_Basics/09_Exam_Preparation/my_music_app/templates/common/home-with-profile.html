@@ -1,94 +1,34 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <title>My Music App</title>
-    <!-- Static Load -->
-    <link rel="stylesheet" href="/static/css/style.css" />
-  </head>
+{% extends 'base.html' %}
 
-  <body>
-    <div id="box">
-      <!-- Navigation Bar -->
-      <header>
-        <nav>
-          <img src="/static/images/headphones.png" alt="headphones" />
-          <a href="#">Home</a>
-          <ul></ul>
-          <ul>
-            <!--Only for user with created profile-->
-            <li><a href="#">Create Album</a></li>
-            <li><a href="#">Profile</a></li>
-          </ul>
-        </nav>
-      </header>
-      <!-- End Navigation Bar -->
+{% block main_content %}
 
-      <!-- Main Content -->
-      <!-- Catalog with Albums-->
-      <section id="catalogPage">
+    <!-- Main Content -->
+    <!-- Catalog with Albums-->
+    <section id="catalogPage">
         <!--  If No albums in catalog -->
-        <p>No Albums in Catalog!</p>
+        {% if not object_list %}
+            <p>No Albums in Catalog!</p>
+        {% else %}
+            <!-- If albums in catalog -->
+            <h1>All Albums</h1>
+            {% for album in object_list %}
+                <div class="card-box">
+                    <img src="{{ album.image_url }}" alt="Cover Image"/>
+                    <div>
+                        <div class="text-center">
+                            <p class="name">Name: {{ album.name }}</p>
+                            <p class="artist">Artist: {{ album.artist_name }}</p>
+                            <p class="genre">Genre: {{ album.genre }}</p>
+                            <p class="price">Price: ${{ album.price|floatformat:2 }}</p>
+                        </div>
+                        <div class="btn-group">
+                            <a href="{% url 'details-album' pk=album.pk %}">Details</a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
 
-        <!-- If albums in catalog -->
-        <h1>All Albums</h1>
-        <!-- First Card-Box in catalog -->
-        <div class="card-box">
-          <img src="/static/images/BrandiCarlile.png" alt="Cover Image" />
-          <div>
-            <div class="text-center">
-              <p class="name">Name: In These Silent Days</p>
-              <p class="artist">Artist: Brandi Carlile</p>
-              <p class="genre">Genre: Other</p>
-              <p class="price">Price: $12.80</p>
-            </div>
-            <div class="btn-group">
-              <a href="#">Details</a>
-            </div>
-          </div>
-        </div>
-        <!-- End First Card-Box in catalog -->
+        {% endif %}
+    </section>
 
-        <!-- Second Card-Box in catalog -->
-        <div class="card-box">
-          <img src="/static/images/pinkFloyd.jpg" />
-          <div>
-            <div class="text-center">
-              <p class="name">Name: The Dark Side of the Moon</p>
-              <p class="artist">Artist: Pink Floyd</p>
-              <p class="genre">Genre: Rock Music</p>
-              <p class="price">Price: $28.75</p>
-            </div>
-            <div class="btn-group">
-              <a href="#">Details</a>
-            </div>
-          </div>
-        </div>
-        <!-- End Second Card-Box in catalog -->
-
-        <!-- Third Card-Box in catalog -->
-        <div class="card-box">
-          <img src="/static/images/Lorde.jpg" />
-          <div>
-            <div class="text-center">
-              <p class="name">Name: Melodrama</p>
-              <p class="artist">Artist: Lorde</p>
-              <p class="genre">Genre: Pop Music</p>
-              <p class="price">Price: $7.33</p>
-            </div>
-            <div class="btn-group">
-              <a href="#">Details</a>
-            </div>
-          </div>
-        </div>
-        <!-- End Third Card-Box in catalog -->
-      </section>
-
-      <!-- Footer -->
-      <footer>
-        <div>&copy;SoftUni Team 2024. All rights reserved.</div>
-      </footer>
-      <!-- End Footer -->
-    </div>
-  </body>
-</html>
+{% endblock %}
