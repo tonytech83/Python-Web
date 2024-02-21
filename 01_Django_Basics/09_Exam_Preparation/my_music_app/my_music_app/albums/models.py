@@ -11,14 +11,14 @@ class Album(models.Model):
     MIN_PRICE = 0.0
 
     class MusicGenre(models.TextChoices):
-        POP = 'POP_MUSIC', 'Pop Music'
-        JAZZ = 'JAZZ_MUSIC', 'Jazz Music'
-        RNB = 'RNB_MUSIC', 'R&B Music'
-        ROCK = 'ROCK_MUSIC', 'Rock Music'
-        COUNTRY = 'COUNTRY_MUSIC', 'Country Music'
-        DANCE = 'DANCE_MUSIC', 'Dance Music'
-        HIP_HOP = 'HIP_HOP_MUSIC', 'Hip Hop Music'
-        OTHER = 'OTHER_MUSIC', 'Other'
+        POP = 'Pop Music', 'Pop Music'
+        JAZZ = 'Jazz Music', 'Jazz Music'
+        RNB = 'R&B Music', 'R&B Music'
+        ROCK = 'Rock Music', 'Rock Music'
+        COUNTRY = 'Country Music', 'Country Music'
+        DANCE = 'Dance Music', 'Dance Music'
+        HIP_HOP = 'Hip Hop Music', 'Hip Hop Music'
+        OTHER = 'Other', 'Other'
 
     name = models.CharField(
         max_length=MAX_NAME_LENGTH,

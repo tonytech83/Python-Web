@@ -6,29 +6,16 @@
     <!-- Catalog with Albums-->
     <section id="catalogPage">
         <!--  If No albums in catalog -->
-        {% if not object_list %}
-            <p>No Albums in Catalog!</p>
-        {% else %}
-            <!-- If albums in catalog -->
+        {% if object_list %}
             <h1>All Albums</h1>
-            {% for album in object_list %}
-                <div class="card-box">
-                    <img src="{{ album.image_url }}" alt="Cover Image"/>
-                    <div>
-                        <div class="text-center">
-                            <p class="name">Name: {{ album.name }}</p>
-                            <p class="artist">Artist: {{ album.artist_name }}</p>
-                            <p class="genre">Genre: {{ album.genre }}</p>
-                            <p class="price">Price: ${{ album.price|floatformat:2 }}</p>
-                        </div>
-                        <div class="btn-group">
-                            <a href="{% url 'details-album' pk=album.pk %}">Details</a>
-                        </div>
-                    </div>
-                </div>
-            {% endfor %}
-
+        {% else %}
+            <p>No Albums in Catalog!</p>
         {% endif %}
+
+        {% for album in object_list %}
+            <!-- If albums in catalog -->
+            {% include 'partials/album_card.html' with album=album %}
+        {% endfor %}
     </section>
 
 {% endblock %}

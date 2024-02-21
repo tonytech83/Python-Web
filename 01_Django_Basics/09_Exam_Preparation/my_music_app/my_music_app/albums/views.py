@@ -31,7 +31,7 @@ class AlbumEditView(views.UpdateView):
 
 
 class AlbumDeleteView(views.DeleteView):
-    model = Album
+    queryset = Album.objects.all()
     template_name = 'album/album-delete.html'
     form_class = AlbumDeleteForm
 
@@ -42,3 +42,4 @@ class AlbumDeleteView(views.DeleteView):
         kwargs['instance'] = self.object
 
         return kwargs
+

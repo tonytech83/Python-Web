@@ -1,4 +1,3 @@
-from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views import generic as views
 
@@ -11,15 +10,8 @@ class ProfileDetailView(views.DetailView):
 
     template_name = 'profile/profile-details.html'
 
-    def get(self, request, *args, **kwargs):
-        profile = Profile.objects.first()
-
-        if profile:
-            context = {
-                'profile': profile,
-            }
-
-            return render(request, self.template_name, context)
+    def get_object(self, queryset=None):
+        return Profile.objects.first()
 
 
 class ProfileDeleteView(views.DeleteView):
@@ -30,6 +22,3 @@ class ProfileDeleteView(views.DeleteView):
 
     def get_object(self, queryset=None):
         return Profile.objects.first()
-
-    def post(self, request, *args, **kwargs):
-        return self.delete(request, *args, **kwargs)
