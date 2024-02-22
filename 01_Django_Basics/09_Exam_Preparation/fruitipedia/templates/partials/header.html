@@ -1,0 +1,25 @@
+{% load static %}
+
+<!-- Navigation -->
+<a id="logo" href="{% url 'index' %}">
+    <img id="logo-img" src="{% static '/images/logo.png' %}" alt="logo"/>
+</a>
+
+<nav>
+
+    <!-- If there is a user profile -->
+    {% if profile %}
+        <div class="user">
+            <a href="#">Dashboard</a>
+            <a href="#">Add Fruit</a>
+            <a href="#">Profile</a>
+        </div>
+    {% else %}
+        <!-- If user profile has NOT been created -->
+        <div class="guest">
+
+            <a href="#">Create Profile</a>
+
+        </div>
+    {% endif %}
+</nav>
