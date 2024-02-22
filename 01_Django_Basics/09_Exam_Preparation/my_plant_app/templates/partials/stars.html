@@ -1,0 +1,6 @@
+{% load custom_tags %}
+{% load static %}
+
+{% for star in stars|range_of_stars %}
+    <img class="star-img" src="{% static 'images/star3.png' %}" alt="profile-image"/>
+{% endfor %}

@@ -1,0 +1,15 @@
+<div class="plant-card">
+    <div class="image-wrap">
+        <!-- plant image -->
+        <img src="{{ plant.image_url }}"
+             alt="Indoor Plants">
+    </div>
+    <!-- plant name -->
+    <h3>{{ plant.name }}</h3>
+    <!-- plant description -->
+    <h1>{{ plant.description|truncatechars:20 }}</h1>
+    <div class="details-buttons">
+        <!-- plant details button -->
+        <a href="{% url 'detail-plant' pk=plant.pk %}" class="details-btn">Details</a>
+    </div>
+</div>
