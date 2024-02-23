@@ -19,23 +19,27 @@ class Fruit(models.Model):
         null=False,
         blank=False,
         error_messages={
-            'unique': "This field must be unique. Custom error message.",
-        }
+            'unique': 'This field must be unique. Custom error message.',
+        },
+        verbose_name='Name',
     )
 
     image_url = models.URLField(
         null=False,
         blank=False,
+        verbose_name='Image URL',
     )
 
     description = models.TextField(
         null=False,
         blank=False,
+        verbose_name='Description',
     )
 
     nutrition = models.TextField(
         null=True,
         blank=True,
+        verbose_name="Nutrition",
     )
 
     owner = models.ForeignKey(

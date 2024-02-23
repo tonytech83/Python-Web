@@ -45,6 +45,7 @@ class Profile(models.Model):
         unique=True,
         null=False,
         blank=False,
+        verbose_name='Email'
     )
 
     password = models.CharField(
@@ -54,7 +55,8 @@ class Profile(models.Model):
         ),
         null=False,
         blank=False,
-        help_text=f'*Password length requirements: {MIN_PASSWORD_LENGTH} to {MAX_PASSWORD_LENGTH} characters'
+        help_text=f'*Password length requirements: {MIN_PASSWORD_LENGTH} to {MAX_PASSWORD_LENGTH} characters',
+        verbose_name='Password'
     )
 
     image_url = models.URLField(
@@ -68,3 +70,7 @@ class Profile(models.Model):
         null=True,
         blank=True,
     )
+
+    @property
+    def full_name(self):
+        return f'{self.first_name} {self.last_name}'
