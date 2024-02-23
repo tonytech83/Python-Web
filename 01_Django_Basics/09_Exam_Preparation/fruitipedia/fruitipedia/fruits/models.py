@@ -44,6 +44,5 @@ class Fruit(models.Model):
 
     owner = models.ForeignKey(
         to=Profile,
-        # TODO: To fix `on_delete` if needed
         on_delete=models.CASCADE,
     )

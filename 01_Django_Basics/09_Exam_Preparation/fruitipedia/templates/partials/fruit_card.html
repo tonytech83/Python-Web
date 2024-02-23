@@ -1,0 +1,10 @@
+<div class="fruit">
+    <!-- fruit image -->
+    <img src="{{ fruit.image_url }}" alt="example1"/>
+    <!-- fruit name -->
+    <h3 class="title">{{ fruit.name }}</h3>
+    <!-- fruit description -->
+    <p class="description">{{ fruit.description|truncatechars:50 }}</p>
+    <!-- fruit details button -->
+    <a class="details-btn" href="{% url 'detail-fruit' pk=fruit.pk %}">More Info</a>
+</div>
