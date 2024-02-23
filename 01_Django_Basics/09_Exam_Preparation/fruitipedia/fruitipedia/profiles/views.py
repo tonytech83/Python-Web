@@ -1,7 +1,6 @@
 from django.urls import reverse_lazy
 from django.views import generic as views
 
-from fruitipedia.fruits.models import Fruit
 from fruitipedia.profiles.forms import ProfileCreatForm, ProfileEditForm
 from fruitipedia.profiles.models import Profile
 
