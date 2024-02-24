@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <section id="catalogue">
+        {% if object_list %}
+            <h1>Total cars: {{ object_list.count }}</h1>
+        {% endif %}
+
+        {% for car in object_list %}
+            {% include 'partials/car-card.html' with car=car %}
+        {% empty %}
+            <!-- Display a paragraph: If there are no cars yet-->
+            <p class="no-articles">No cars yet</p>
+        {% endfor %}
+
+    </section>
+
+{% endblock %}
