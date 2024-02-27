@@ -1,0 +1,16 @@
+<ul>
+    {% for model in model1_list %}
+        <li>
+            {# XSS attack - do not use `safe` in forms, input can be saved into DB #}
+            {# {{ model.title|safe }} #}
+            {{ model.title }}
+        </li>
+    {% endfor %}
+</ul>
+
+{# This is not enough for Parameter Tampering #}
+{# There should also decorator or mixin on View (func or class) #}
+{% if False %} {# complex auth check #}
+    <a href="{% url 'private_view' %}">To private view</a>
+{% endif %}
+
