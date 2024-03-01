@@ -1,10 +1,11 @@
 from django.contrib.auth.base_user import AbstractBaseUser
-from django.contrib.auth.models import AbstractUser, PermissionsMixin
+from django.contrib.auth import models as auth_models
 from django.db import models
 
 
 # Just add new fields
-# class AppUser(AbstractUser):
+# to work in `settings.py` should be added `AUTH_USER_MODEL = 'accounts.AppUser'`
+# class AppUser(auth_models.AbstractUser):
 #     age = models.IntegerField()
 
 # Completely replace the User
