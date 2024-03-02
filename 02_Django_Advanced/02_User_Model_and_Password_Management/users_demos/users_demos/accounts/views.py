@@ -21,6 +21,7 @@ UserModel = get_user_model()
 class LoginUserView(auth_views.LoginView):
     template_name = 'accounts/login_user.html'
 
+    # use `get_success_url(self)` to redirect to dynamic url
     # def get_success_url(self):
     #     return reverse_lazy('index')
     # The method `get_success_url(self)` should be replaced with
