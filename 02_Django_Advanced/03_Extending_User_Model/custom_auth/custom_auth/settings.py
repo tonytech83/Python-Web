@@ -110,4 +110,5 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Default auth user model in all Django apps
-AUTH_USER_MODEL = 'accounts.AccountsUser'
+# AUTH_USER_MODEL = 'accounts.AccountsUser' # User model point 2
+

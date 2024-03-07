@@ -1,4 +1,7 @@
+from django.contrib.auth import get_user_model
 from django.db import models
+
+UserModel = get_user_model()
 
 
 # No table needed
@@ -13,4 +16,9 @@ class AuditModel(models.Model):
 class ModelOne(AuditModel, models.Model):
     field = models.CharField(
         max_length=20,
+    )
+
+    user = models.ForeignKey(
+        to=UserModel,
+        on_delete=models.DO_NOTHING,
     )

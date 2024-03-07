@@ -9,12 +9,11 @@ Variants:
 3. Rewrite the whole user (Extend the `AbstractBaseUser` class)
 """
 
-# UserModel = get_user_model()
+UserModel = get_user_model()
 
 """ 
 1. Proxy Model - Hardly used, only adds custom behaviour (configuration from Meta and custom methods)
 """
-
 
 # class AccountsUserProxy(UserModel):
 #     class Meta:
@@ -37,12 +36,11 @@ Pros:
     - No need to rewrite the Django auth system
 """
 
-
-class AccountsUser(auth_models.AbstractUser):
-    age = models.PositiveIntegerField(
-        null=True,
-        blank=True,
-    )
+# class AccountsUser(auth_models.AbstractUser):
+#     age = models.PositiveIntegerField(
+#         null=True,
+#         blank=True,
+#     )
 
 
 """
@@ -55,3 +53,21 @@ class AccountsUser(auth_models.AbstractUser):
 Pros:
     - Easier migration to an other auth model in the future
 """
+
+
+# 3.1.
+class AccountUserProfile(models.Model):
+    """
+    Keep all personal information about user
+    """
+    age = models.PositiveIntegerField(
+        null=True,
+        blank=True,
+    )
+
+    user = models.OneToOneField(
+        to=UserModel,
+        on_delete=models.CASCADE,
+        primary_key=True,  # profile_obj.pk == profile.user_id
+    )
+
