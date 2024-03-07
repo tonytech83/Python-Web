@@ -4,5 +4,5 @@
     {% csrf_token %}
 
     <button>Login</button>
-    or <a href="#">Register</a>
+    or <a href="{% url 'register-user' %}">Register</a>
 </form>
