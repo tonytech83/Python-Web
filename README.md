@@ -45,7 +45,9 @@ The training includes practical exercises (labs) and workshops for building comp
 In the Django Advanced course, participants will delve into the details of web programming with Python, using one of the most popular Python Frameworks - Django. Enrolled students will learn how to register, log in, and log out users. Moreover, attention will be paid to asynchronous operations and the nuances in developing dynamic web applications. The Django REST Framework will also be explored. Participants will learn the fundamental concepts of Unit and Integration Testing and will clarify best practices for testing a Web application. The course concludes with the defense of a personal project based on the Django framework. The training emphasizes practical exercises that engage participants in real projects for creating web pages, developing comprehensive modern websites with good design and contemporary structure.  
 </h5>
 
-TODO
+- [`Authentication and Authorization`](https://github.com/tonytech83/Python-Web/tree/main/02_Django_Advanced/01_Authentication_and_Authorization/auth_demos)
+- [`User Model and Password Management`](https://github.com/tonytech83/Python-Web/tree/main/02_Django_Advanced/02_User_Model_and_Password_Management/users_demos)
+- [`Extending User Model`](https://github.com/tonytech83/Python-Web/tree/main/02_Django_Advanced/03_Extending_User_Model/custom_auth)
 
 <br/>
 <br/>
