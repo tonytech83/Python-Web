@@ -8,14 +8,10 @@
             <h1>Petstagram</h1>
 
             <!-- Start Register Form -->
-            <form action="{% url 'register' %}" method="POST">
-                <input type="text" placeholder="Username">
+            <form action="{% url 'register-user' %}" method="POST">
+                {{ form.as_p }}
 
-                <input type="email" placeholder="Email">
-
-                <input type="password" placeholder="Password">
-
-                <input type="password" placeholder="Repeat Password">
+                {% csrf_token %}
 
                 <!-- Register Button -->
                 <button type="submit">Register</button>
@@ -26,7 +22,7 @@
         <div class="second-option">
 
             <!-- Link to Login Page -->
-            <p>Have an account? <a href="{% url 'login' %}">Log in</a></p>
+            <p>Have an account? <a href="{% url 'login-user' %}">Log in</a></p>
         </div>
     </div>
     <!-- End Register Section -->

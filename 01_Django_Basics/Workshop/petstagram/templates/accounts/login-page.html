@@ -8,18 +8,14 @@
             <h1>Petstagram</h1>
 
             <!-- Start Login Form-->
-            <form action="{% url 'login' %}">
-                <p>
-                    <label for="id_username">Username:</label>
-                    <input type="text" placeholder="Username">
-                </p>
-                <p>
-                    <label for="id_password">Password:</label>
-                    <input type="password" placeholder="Password">
-                </p>
+            <form action="{% url 'login-user' %}?next={{ next }}" method="POST">
+                
+                {{ form.as_p }}
 
                 <!-- Login Button-->
                 <button type="submit">Log in</button>
+
+                {% csrf_token %}
             </form>
             <!-- End Login Form -->
 
@@ -27,7 +23,7 @@
         <div class="second-option">
 
             <!-- Link to Register Page-->
-            <p>Don't have an account? <a href="{% url 'register' %}">Register</a></p>
+            <p>Don't have an account? <a href="{% url 'register-user' %}">Register</a></p>
         </div>
     </div>
     <!-- End Login Section-->

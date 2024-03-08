@@ -1,48 +1,47 @@
-from django.contrib.auth import authenticate, login
-from django.contrib.auth.models import User
-from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth import get_user_model, login
 
+from django.contrib.auth import views as auth_views
 from django.urls import reverse_lazy
-from django.views import generic as auth_views
+from django.views import generic as views
+
+from petstagram.accounts.forms import PetstagramUserCreationForm
+
+UserModel = get_user_model()
 
 
-class RegisterView(auth_views.CreateView):
-    model = User
-    template_name = 'accounts/register-page.html'
-    fields = '__all__'
-
-
-class LoginView(auth_views.FormView):
-    form_class = AuthenticationForm
+class LoginUserView(auth_views.LoginView):
     template_name = 'accounts/login-page.html'
-    success_url = reverse_lazy('common/home_page.html')
+    redirect_authenticated_user = True
 
+
+class RegisterUserView(views.CreateView):
+    form_class = PetstagramUserCreationForm
+    template_name = 'accounts/register-page.html'
+
+    success_url = reverse_lazy('home-page')
+
+    # register to log in automation
+    # Should make changes in `PetstagramUserCreationForm`
     def form_valid(self, form):
-        # Authenticate user
-        username = form.cleaned_data['username']
-        password = form.cleaned_data['password']
-        user = authenticate(self.request, username=username, password=password)
+        # `form_valid` will call `save`
+        result = super().form_valid(form)
 
-        if user is not None:
-            if user.is_active:
-                login(self.request, user)
-                return super().form_valid(form)
-            else:
-                form.add_error(None, "This account is inactive.")
-        else:
-            form.add_error(None, "Invalid username or password.")
+        login(self.request, form.user)
 
-        return super().form_invalid(form)
+        return result
 
 
-class ShowProfileDetailsView(auth_views.DetailView):
-    model = User
-    template_name = 'accounts/profile-details-page.html'
+class ShowProfileDetailsView(auth_views.FormView):
+    pass
+    # model = UserModel
+    # template_name = 'accounts/profile-details-page.html'
 
 
-class EditProfileView(auth_views.UpdateView):
-    template_name = 'accounts/profile-edit-page.html'
+class EditProfileView(auth_views.FormView):
+    pass
+    # template_name = 'accounts/profile-edit-page.html'
 
 
-class DeleteProfileView(auth_views.DeleteView):
-    template_name = 'accounts/profile-delete-page.html'
+class DeleteProfileView(auth_views.FormView):
+    pass
+    # template_name = 'accounts/profile-delete-page.html'
