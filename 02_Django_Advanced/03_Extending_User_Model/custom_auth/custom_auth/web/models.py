@@ -1,5 +1,7 @@
 from django.contrib.auth import get_user_model
 from django.db import models
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 
 UserModel = get_user_model()
 
@@ -22,3 +24,12 @@ class ModelOne(AuditModel, models.Model):
         to=UserModel,
         on_delete=models.DO_NOTHING,
     )
+
+    def __str__(self):
+        return self.field
+
+
+# Example of signals
+@receiver(post_save, sender=ModelOne)
+def model_one_created(sender, instance, created, **kwargs):
+    print(sender, instance, created, kwargs)

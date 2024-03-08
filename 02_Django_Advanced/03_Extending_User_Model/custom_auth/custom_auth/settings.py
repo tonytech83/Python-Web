@@ -25,8 +25,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-    'custom_auth.accounts',
-    'custom_auth.web',
+    'custom_auth.accounts.apps.AccountsConfig',
+    'custom_auth.web.apps.WebConfig',
 ]
 
 MIDDLEWARE = [
@@ -111,4 +111,4 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Default auth user model in all Django apps
 # AUTH_USER_MODEL = 'accounts.AccountsUser' # User model point 2
-
+AUTH_USER_MODEL = 'accounts.AccountUser'  # User model for point 3.2

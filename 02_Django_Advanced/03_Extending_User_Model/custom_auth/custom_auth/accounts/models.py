@@ -1,6 +1,10 @@
 from django.contrib.auth import get_user_model, models as auth_models
+from django.utils.translation import gettext_lazy as _
+from django.utils import timezone
 
 from django.db import models
+
+from custom_auth.accounts.managers import AccountUserManager
 
 """
 Variants:
@@ -9,7 +13,7 @@ Variants:
 3. Rewrite the whole user (Extend the `AbstractBaseUser` class)
 """
 
-UserModel = get_user_model()
+# UserModel = get_user_model()
 
 """ 
 1. Proxy Model - Hardly used, only adds custom behaviour (configuration from Meta and custom methods)
@@ -56,9 +60,67 @@ Pros:
 
 
 # 3.1.
-class AccountUserProfile(models.Model):
+# class AccountUserProfile(models.Model):
+#     """
+#     Keep all personal information about user
+#     """
+#     age = models.PositiveIntegerField(
+#         null=True,
+#         blank=True,
+#     )
+#
+#     user = models.OneToOneField(
+#         to=UserModel,
+#         on_delete=models.CASCADE,
+#         primary_key=True,  # profile_obj.pk == profile.user_id
+#     )
+
+# 3.2
+class AccountUser(auth_models.AbstractBaseUser, auth_models.PermissionsMixin):
     """
-    Keep all personal information about user
+    Authentication information
+    """
+    email = models.EmailField(
+        unique=True,
+        null=False,
+        blank=False,
+        help_text=_(
+            "Required a valid email address."
+        ),
+        error_messages={
+            "unique": _("A user with that email already exists."),
+        },
+    )
+
+    is_active = models.BooleanField(
+        _("active"),
+        default=True,
+        help_text=_(
+            "Designates whether this user should be treated as active. "
+            "Unselect this instead of deleting accounts."
+        ),
+    )
+
+    date_joined = models.DateTimeField(
+        _("date joined"),
+        default=timezone.now,
+    )
+    # Should be added to have access to admin console
+    is_staff = models.BooleanField(
+        _("staff status"),
+        default=False,
+        help_text=_("Designates whether the user can log into this admin site."),
+    )
+
+    # Dynamically set which field will be used for other (username) part of the **credentials**
+    USERNAME_FIELD = "email"
+
+    objects = AccountUserManager()
+
+
+class Profile(models.Model):
+    """
+    User profile information
     """
     age = models.PositiveIntegerField(
         null=True,
@@ -66,8 +128,8 @@ class AccountUserProfile(models.Model):
     )
 
     user = models.OneToOneField(
-        to=UserModel,
+        to=AccountUser,
         on_delete=models.CASCADE,
-        primary_key=True,  # profile_obj.pk == profile.user_id
+        primary_key=True,
+        related_name="profile",
     )
-

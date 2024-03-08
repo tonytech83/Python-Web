@@ -1,3 +1,8 @@
 from django.contrib import admin
 
-# Register your models here.
+from custom_auth.web.models import ModelOne
+
+
+@admin.register(ModelOne)
+class ModelOneAdmin(admin.ModelAdmin):
+    pass
