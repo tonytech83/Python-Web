@@ -3,6 +3,7 @@ from django.views import generic as views
 
 from django.contrib.auth import mixins as auth_mixins
 
+from petstagram.core.view_mixins import OwnerRequiredMixin
 from petstagram.pets.forms import PetCreateForm, PetEditForm, PetDeleteForm
 from petstagram.pets.models import Pet
 
@@ -35,7 +36,7 @@ class AddPetView(auth_mixins.LoginRequiredMixin, views.CreateView):
         })
 
 
-class EditPetView(auth_mixins.LoginRequiredMixin, views.UpdateView):
+class EditPetView(OwnerRequiredMixin, views.UpdateView):
     model = Pet  # or queryset = Pet.objects.all()
     template_name = 'pets/pet-edit-page.html'
     form_class = PetEditForm
@@ -56,7 +57,7 @@ class EditPetView(auth_mixins.LoginRequiredMixin, views.UpdateView):
         })
 
 
-class DetailsPetView(auth_mixins.LoginRequiredMixin, views.DetailView):
+class DetailsPetView(OwnerRequiredMixin, views.DetailView):
     # model = Pet  # or `queryset`
 
     # with `queryset` we can optimize the queries to DB
