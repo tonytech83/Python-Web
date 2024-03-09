@@ -1,5 +1,7 @@
 {% extends 'base/base.html' %}
 
+{% load filters %}
+
 {% block page_content %}
 
     <!-- Start Register Section -->
@@ -9,7 +11,15 @@
 
             <!-- Start Register Form -->
             <form action="{% url 'register-user' %}" method="POST">
-                {{ form.as_p }}
+                <p>
+                    {{ form.email|placeholder:"Email" }}
+                </p>
+                <p>
+                    {{ form.password1|placeholder:"Password" }}
+                </p>
+                <p>
+                    {{ form.password2|placeholder:"Repeat Password" }}
+                </p>
 
                 {% csrf_token %}
 

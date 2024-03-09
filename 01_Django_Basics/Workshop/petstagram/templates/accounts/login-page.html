@@ -1,5 +1,7 @@
 {% extends 'base/base.html' %}
 
+{% load filters %}
+
 {% block page_content %}
 
     <!-- Start Login Section-->
@@ -9,8 +11,13 @@
 
             <!-- Start Login Form-->
             <form action="{% url 'login-user' %}?next={{ next }}" method="POST">
-                
-                {{ form.as_p }}
+
+                <p>
+                    {{ form.username|placeholder:"Email" }}
+                </p>
+                <p>
+                    {{ form.password|placeholder:"Password" }}
+                </p>
 
                 <!-- Login Button-->
                 <button type="submit">Log in</button>

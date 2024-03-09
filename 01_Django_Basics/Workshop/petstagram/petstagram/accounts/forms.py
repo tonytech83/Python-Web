@@ -9,8 +9,3 @@ class PetstagramUserCreationForm(auth_forms.UserCreationForm):
     class Meta(auth_forms.UserCreationForm.Meta):
         model = PetstagramUser
         fields = ('email',)
-
-    def save(self, *args, **kwargs):
-        self.user = super().save(*args, **kwargs)
-
-        return self.user

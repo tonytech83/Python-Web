@@ -1,15 +1,32 @@
 from django.urls import reverse, reverse_lazy
 from django.views import generic as views
 
+from django.contrib.auth import mixins as auth_mixins
+
 from petstagram.pets.forms import PetCreateForm, PetEditForm, PetDeleteForm
 from petstagram.pets.models import Pet
 
 
-class AddPetView(views.CreateView):
+class AddPetView(auth_mixins.LoginRequiredMixin, views.CreateView):
     # when using CreateView `model` is not needed
     # model = Pet
     template_name = 'pets/pet-add-page.html'
     form_class = PetCreateForm
+
+    # Variant 1 to attach user to pet in creation
+    def form_valid(self, form):
+        instance = form.save(commit=False)
+        instance.user = self.request.user
+
+        return super().form_valid(form)
+
+    # Variant 2 to attach user to pet in creation
+    # def get_form(self, form_class=None):
+    #     form = super().get_form(form_class=form_class)
+    #
+    #     form.instance.user = self.request.user
+    #
+    #     return form
 
     def get_success_url(self):
         return reverse('details-pet', kwargs={
@@ -18,7 +35,7 @@ class AddPetView(views.CreateView):
         })
 
 
-class EditPetView(views.UpdateView):
+class EditPetView(auth_mixins.LoginRequiredMixin, views.UpdateView):
     model = Pet  # or queryset = Pet.objects.all()
     template_name = 'pets/pet-edit-page.html'
     form_class = PetEditForm
@@ -39,7 +56,7 @@ class EditPetView(views.UpdateView):
         })
 
 
-class DetailsPetView(views.DetailView):
+class DetailsPetView(auth_mixins.LoginRequiredMixin, views.DetailView):
     # model = Pet  # or `queryset`
 
     # with `queryset` we can optimize the queries to DB
@@ -65,7 +82,7 @@ class DetailsPetView(views.DetailView):
     #     return pet
 
 
-class DeletePetView(views.DeleteView):
+class DeletePetView(auth_mixins.LoginRequiredMixin, views.DeleteView):
     model = Pet
     form_class = PetDeleteForm
     template_name = 'pets/pet-delete-page.html'

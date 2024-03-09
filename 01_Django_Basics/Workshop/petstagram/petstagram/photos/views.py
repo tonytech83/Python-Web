@@ -1,11 +1,13 @@
 from django.urls import reverse
 from django.views import generic as views
 
+from django.contrib.auth import mixins as auth_mixins
+
 from petstagram.photos.forms import PhotoCreateForm, PhotoEditForm
 from petstagram.photos.models import Photo
 
 
-class AddPhotoView(views.CreateView):
+class AddPhotoView(auth_mixins.LoginRequiredMixin, views.CreateView):
     queryset = (Photo.objects.all()
                 .prefetch_related('tagged_pets'))
 
@@ -17,8 +19,15 @@ class AddPhotoView(views.CreateView):
             'pk': self.object.pk,
         })
 
+    def get_form(self, form_class=None):
+        form = super().get_form(form_class=form_class)
 
-class DetailPhotoView(views.DetailView):
+        form.instance.user = self.request.user
+
+        return form
+
+
+class DetailPhotoView(auth_mixins.LoginRequiredMixin, views.DetailView):
     queryset = (Photo.objects.all()
                 .prefetch_related('photolike_set')
                 .prefetch_related('photocomment_set')
@@ -27,7 +36,7 @@ class DetailPhotoView(views.DetailView):
     template_name = 'photos/photo-details-page.html'
 
 
-class EditPhotoView(views.UpdateView):
+class EditPhotoView(auth_mixins.LoginRequiredMixin, views.UpdateView):
     queryset = (Photo.objects.all()
                 .prefetch_related('tagged_pets'))
 

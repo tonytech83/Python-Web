@@ -25,7 +25,7 @@ INSTALLED_APPS = [
 
     "petstagram.photos",
     "petstagram.pets",
-    "petstagram.accounts",
+    "petstagram.accounts.apps.AccountsConfig",
     "petstagram.common",
 ]
 

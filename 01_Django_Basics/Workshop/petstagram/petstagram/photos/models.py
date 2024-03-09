@@ -1,8 +1,11 @@
+from django.contrib.auth import get_user_model
 from django.core.validators import MinLengthValidator
 from django.db import models
 
 from petstagram.pets.models import Pet
 from petstagram.photos.validators import validate_file_size
+
+UserModel = get_user_model()
 
 
 class Photo(models.Model):
@@ -43,4 +46,9 @@ class Photo(models.Model):
     tagged_pets = models.ManyToManyField(
         to=Pet,
         blank=True,
+    )
+
+    user = models.ForeignKey(
+        to=UserModel,
+        on_delete=models.RESTRICT,
     )
