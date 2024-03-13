@@ -1,6 +1,5 @@
 import time
 
-from django.shortcuts import render
 from django.views import generic as views
 
 """
@@ -46,3 +45,32 @@ class Index2View(MeasureExecutionTimeMixin, views.TemplateView):
         time.sleep(5)
 
         return super().get_context_data(**kwargs)
+
+
+"""
+Example for Django session
+
+This should be done in `dispatch` or `get`
+"""
+
+
+def get_load_count(request):
+    load_count = request.session.get('load_count', 0)
+
+    return load_count + 1
+
+
+class Index3View(views.TemplateView):
+    template_name = 'web/index-session.html'
+
+    def dispatch(self, request, *args, **kwargs):
+        load_count = get_load_count(request)
+        request.session['load_count'] = load_count
+
+        return super().dispatch(request, *args, **kwargs)
+
+    def get_context_data(self, **kwargs):
+        time.sleep(1)
+        context = super().get_context_data(**kwargs)
+        context['load_count'] = self.request.session.get('load_count', 0)
+        return context
