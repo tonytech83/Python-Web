@@ -25,7 +25,10 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    'rest_framework',  # The package name is 'djangorestframework', the app name is 'rest_framework'
+
     'rest_basics.web.apps.WebConfig',
+    "rest_basics.api.apps.ApiConfig"
 ]
 
 MIDDLEWARE = [
