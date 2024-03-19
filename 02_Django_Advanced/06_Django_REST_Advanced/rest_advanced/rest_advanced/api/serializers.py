@@ -9,20 +9,51 @@ class AuthorForBookListSerializer(serializers.ModelSerializer):
         fields = ('name',)
 
 
+class AuthorForCreateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Author
+        fields = ('name',)
+
+
 class BookForAuthorListListSerializer(serializers.ModelSerializer):
     class Meta:
         model = Book
         fields = '__all__'
 
 
-# This causing loop
+# This is for List
 class BookForListSerializer(serializers.ModelSerializer):
     # Nested Serializer
-    author = AuthorForBookListSerializer(many=False, read_only=True)
+    author = AuthorForBookListSerializer(many=False)
 
     class Meta:
         model = Book
         fields = '__all__'
+
+
+# This is for create
+class BookForCreateSerializer(serializers.ModelSerializer):
+    author = AuthorForCreateSerializer(many=False)
+
+    class Meta:
+        model = Book
+        fields = '__all__'
+
+    def create(self, **kwargs):
+        # 1validated_data` in DRF is the same as `cleaned_data` in Django Forms
+        author_data = self.validated_data.get('author', None)
+        # author validation
+
+        # Check if `author` exists or create
+        author, _ = Author.objects.get_or_create(**author_data)
+
+        # Rewrite information for `author`
+        book_data = {
+            **self.validated_data,
+            'author': author,
+        }
+
+        return Book.objects.create(**book_data)
 
 
 # This is OK, there no defined `author`
