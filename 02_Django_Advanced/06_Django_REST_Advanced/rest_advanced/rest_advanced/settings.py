@@ -4,9 +4,6 @@ from decouple import config
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
-
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = config('SECRET_KEY')
 
@@ -25,12 +22,18 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    # Django REST framework
     'rest_framework',
+    # Django REST framework token
+    'rest_framework.authtoken',
+
+    # Nice looking API UI
     'drf_spectacular',
     'drf_spectacular_sidecar',
 
     "rest_advanced.api.apps.ApiConfig",
-    "rest_advanced.web.apps.WebConfig"
+    "rest_advanced.web.apps.WebConfig",
+    "rest_advanced.accounts.apps.AccountsConfig"
 ]
 
 MIDDLEWARE = [
@@ -109,6 +112,11 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 REST_FRAMEWORK = {
     'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
+
+    # If you want to work with Django REST framework authentication
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.TokenAuthentication',
+    ],
 }
 
 SPECTACULAR_SETTINGS = {

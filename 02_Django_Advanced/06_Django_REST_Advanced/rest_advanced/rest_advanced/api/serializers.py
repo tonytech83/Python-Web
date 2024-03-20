@@ -39,9 +39,9 @@ class BookForCreateSerializer(serializers.ModelSerializer):
         model = Book
         fields = '__all__'
 
-    def create(self, **kwargs):
-        # 1validated_data` in DRF is the same as `cleaned_data` in Django Forms
-        author_data = self.validated_data.get('author', None)
+    def create(self, validated_data):
+        # `validated_data` in DRF is the same as `cleaned_data` in Django Forms
+        author_data = self.validated_data.pop('author', None)
         # author validation
 
         # Check if `author` exists or create

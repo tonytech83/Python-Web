@@ -1,8 +1,9 @@
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 
-from rest_framework import generics as api_generic_views
+from rest_framework import generics as api_generic_views, permissions
 
+from rest_advanced.api.permissions import IsOwnerPermission
 from rest_advanced.api.serializers import AuthorForListSerializer, BookForListSerializer, BookForCreateSerializer
 from rest_advanced.web.models import Author, Book
 
@@ -33,6 +34,15 @@ Generic API Views:
 # 1
 class BookListCreateApiView(api_generic_views.ListCreateAPIView):
     queryset = Book.objects.all()
+    permission_classes = [
+        permissions.IsAuthenticatedOrReadOnly,
+        IsOwnerPermission,
+    ]
+
+    # # Permissions - the hard way
+    # def get_permissions(self):
+    #     if self.request.method == 'POST':
+    #         return [permissions.IsAuthenticated()]
 
     # Serializer for list
     list_serializer_class = BookForListSerializer
@@ -42,8 +52,34 @@ class BookListCreateApiView(api_generic_views.ListCreateAPIView):
     # Set default serializer
     serializer_class = list_serializer_class
 
+    # Change the serializer according to method
     def get_serializer_class(self):
         if self.request.method == 'POST':
             return self.create_serializer_class
 
         return self.list_serializer_class
+
+    # # Filter - not need to filter this way
+    # def get_queryset(self):
+    #     queryset = super().get_queryset()
+    #
+    #     # all params from url comes in `self.request.query_params`
+    #     title_pattern = self.request.query_params.get('title')
+    #
+    #     # apply filter
+    #     if title_pattern:
+    #         queryset = queryset.filter(title__icontains=title_pattern)
+    #
+    #     return queryset
+
+    # Filter
+    def filter_queryset(self, queryset):
+        queryset = super().filter_queryset(queryset)
+
+        title_pattern = self.request.query_params.get('title')
+
+        # apply filter
+        if title_pattern:
+            queryset = queryset.filter(title__icontains=title_pattern)
+
+        return queryset
