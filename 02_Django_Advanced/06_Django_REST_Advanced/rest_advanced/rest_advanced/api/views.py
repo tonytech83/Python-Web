@@ -36,7 +36,7 @@ class BookListCreateApiView(api_generic_views.ListCreateAPIView):
     queryset = Book.objects.all()
     permission_classes = [
         permissions.IsAuthenticatedOrReadOnly,
-        IsOwnerPermission,
+        # IsOwnerPermission,
     ]
 
     # # Permissions - the hard way

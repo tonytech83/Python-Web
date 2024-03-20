@@ -12,6 +12,11 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+# When request comes from other port
+CORS_ALLOWED_ORIGINS = [
+    'http://localhost:3000',
+]
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -21,6 +26,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    # Django CORS headers
+    'corsheaders',
 
     # Django REST framework
     'rest_framework',
@@ -39,6 +47,10 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+
+    # Django CORS headers middleware
+    'corsheaders.middleware.CorsMiddleware',
+
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',

@@ -1,25 +1,49 @@
 import logo from './logo.svg';
 import './App.css';
+import {useEffect, useState} from "react";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+const BookList = () => {
+    // Hard coded example
+    // const books = [
+    //     {'title': 'Book 1', author: {'name': 'Penka'}},
+    //     {'title': 'Book 2', author: {'name': 'Obshtata'}},
+    //     {'title': 'Book 3', author: {'name': 'Ivan'}},
+    //     {'title': 'Book 4', author: {'name': 'Stoyan'}},
+    // ]
+
+    const [books, setBooks] = useState([])
+
+    useEffect(() => {
+
+        fetch('http://localhost:8000/books/')
+            .then(response => response.json())
+            .then(books => setBooks(books));
+    }, []);
+
+    return (
+        <ul>
+            {books.map(book => (
+                <li><strong>{book.title}</strong> by <strong>{book.author.name}</strong></li>
+            ))}
+        </ul>
+    );
+};
+
+const Loader = () => {
+    return (
+        <div>
+            <img src={logo} alt=""/>
+        </div>
+    )
+};
+
+const App = () => {
+    return (
+        <div className="App">
+            <Loader/>
+            <BookList/>
+        </div>
+    );
 }
 
 export default App;
