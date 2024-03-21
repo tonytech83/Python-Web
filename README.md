@@ -48,6 +48,9 @@ In the Django Advanced course, participants will delve into the details of web p
 - [`Authentication and Authorization`](https://github.com/tonytech83/Python-Web/tree/main/02_Django_Advanced/01_Authentication_and_Authorization/auth_demos)
 - [`User Model and Password Management`](https://github.com/tonytech83/Python-Web/tree/main/02_Django_Advanced/02_User_Model_and_Password_Management/users_demos)
 - [`Extending User Model`](https://github.com/tonytech83/Python-Web/tree/main/02_Django_Advanced/03_Extending_User_Model/custom_auth)
+- [`Django Middlewares & Sessions`](https://github.com/tonytech83/Python-Web/tree/main/02_Django_Advanced/04_Django_Middlewares_and_Sessions/demos)
+- [`Django REST Basics`](https://github.com/tonytech83/Python-Web/tree/main/02_Django_Advanced/05_Django_REST_Basics)
+- [`Django REST Advanced`](https://github.com/tonytech83/Python-Web/tree/main/02_Django_Advanced/06_Django_REST_Advanced)
 
 <br/>
 <br/>
