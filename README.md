@@ -52,6 +52,10 @@ In the Django Advanced course, participants will delve into the details of web p
 - [`Django REST Basics`](https://github.com/tonytech83/Python-Web/tree/main/02_Django_Advanced/05_Django_REST_Basics)
 - [`Django REST Advanced`](https://github.com/tonytech83/Python-Web/tree/main/02_Django_Advanced/06_Django_REST_Advanced)
 
+### 3. Workshops
+
+- [`Petstagram`](https://github.com/tonytech83/Python-Web/tree/main/01_Django_Basics/Workshop/petstagram)
+
 <br/>
 <br/>
 
