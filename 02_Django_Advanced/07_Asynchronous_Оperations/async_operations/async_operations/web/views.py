@@ -1,5 +1,8 @@
 from django.contrib.auth import get_user_model
+from django.http import HttpResponse
 from django.shortcuts import render
+
+from async_operations.web.tasks import slow_operation, send_example_email
 
 """
 # Sync code
@@ -34,4 +37,10 @@ def index(request):
         'users_count': users_count,
     }
 
-    return render(request, 'web/index.html', context)
+    # for _ in range(500):
+    #     slow_operation.delay()
+
+    send_example_email.delay(users_count, title)
+
+    # return render(request, 'web/index.html', context)
+    return HttpResponse(str(context))

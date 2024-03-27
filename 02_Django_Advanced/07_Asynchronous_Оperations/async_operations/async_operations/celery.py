@@ -9,3 +9,4 @@ app = Celery('async_operations')
 app.config_from_object('django.conf:settings', namespace='CELERY')
 
 app.autodiscover_tasks()
+

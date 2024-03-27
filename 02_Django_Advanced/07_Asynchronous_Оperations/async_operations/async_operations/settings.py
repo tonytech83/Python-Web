@@ -70,8 +70,8 @@ DATABASES = {
 }
 
 # Celery settings
-CELERY_BROKER_URL = 'redis:localhost:6379/0'
-CELERY_RESULT_BACKEND = 'redis:localhost:6379/0'
+CELERY_BROKER_URL = 'redis://localhost:6379/0'
+CELERY_RESULT_BACKEND = 'redis://localhost:6379/0'
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -108,3 +108,11 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# Mail settings
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'localhost'
+EMAIL_PORT = 1025
+EMAIL_HOST_USER = ''
+EMAIL_HOST_PASSWORD = ''
+EMAIL_USE_TLS = False
