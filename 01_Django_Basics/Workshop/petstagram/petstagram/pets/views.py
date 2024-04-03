@@ -31,7 +31,7 @@ class AddPetView(auth_mixins.LoginRequiredMixin, views.CreateView):
 
     def get_success_url(self):
         return reverse('details-pet', kwargs={
-            'username': self.request.GET.get('username'),
+            'username': self.object.user.email,
             'pet_slug': self.object.slug
         })
 
