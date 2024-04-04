@@ -142,3 +142,11 @@ AUTH_USER_MODEL = 'accounts.PetstagramUser'
 LOGIN_REDIRECT_URL = reverse_lazy('home-page')
 LOGIN_URL = reverse_lazy('login-user')
 LOGOUT_REDIRECT_URL = reverse_lazy('home-page')
+
+# EMAIL SETTINGS with mailjet
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'in-v3.mailjet.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = config('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')

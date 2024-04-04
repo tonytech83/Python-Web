@@ -8,6 +8,7 @@ UserModel = get_user_model()
 
 
 class EditPetViewTests(TestBase):
+
     def test_get__when_owner__expect_200_with_correct_pet_and_template(self):
         user = self._create_user()
         pet = create_valid_pet(user)
@@ -26,8 +27,44 @@ class EditPetViewTests(TestBase):
     def test_post_edit__when_owner__expect_302_with_correct_redirect_and_edited_pet_with_unchanged_slug(self):
         pass
 
-    def test_get__when_not_owner__expect_404_with_redirect_to_home(self):
-        pass
+    def test_get_edit__when_anonymous__expect_302_with_redirect_to_login(self):
+        user = self._create_user()
+        pet = create_valid_pet(user)
+
+        edit_pet_url = reverse('edit-pet', kwargs={
+            'username': self.USER_DATA['email'],
+            'pet_slug': pet.slug
+        })
+
+        # No login !!!
+        response = self.client.get(edit_pet_url)
+
+        self.assertEqual(response.status_code, 302)
+        self.assertRedirects(
+            response,
+            f'{reverse("login-user")}?next={edit_pet_url}',
+
+        )
+
+    def test_get__when_not_owner__expect_403_with_redirect_to_home(self):
+        # Created with `self.USER_DATA`
+        user = self._create_user()
+
+        # Create pet with different user
+        pet = create_valid_pet(UserModel.objects.create_user(
+            email=self.USER_DATA["email"] + "2",
+            password=self.USER_DATA["password"],
+        ))
+
+        self.client.login(**self.USER_DATA)
+        response = self.client.get(
+            reverse('edit-pet', kwargs={
+                'username': self.USER_DATA['email'],
+                'pet_slug': pet.slug,
+            }),
+        )
+
+        self.assertEqual(response.status_code, 403)
 
     def test_post__when_not_owner__expect_404_with_redirect_to_home(self):
         pass

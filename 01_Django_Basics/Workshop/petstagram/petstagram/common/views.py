@@ -9,7 +9,8 @@ class HomePageView(views.ListView):
     queryset = (Photo.objects.all()
                 .prefetch_related('tagged_pets')
                 .prefetch_related('photolike_set')
-                .prefetch_related('photocomment_set'))
+                .prefetch_related('photocomment_set')
+                .order_by('-date_of_publication'))
 
     template_name = 'common/home-page.html'
 
